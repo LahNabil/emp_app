@@ -1,0 +1,34 @@
+package net.lahlalia.emp_api.services;
+
+import lombok.RequiredArgsConstructor;
+import net.lahlalia.emp_api.dtos.RegistrationRequest;
+import net.lahlalia.emp_api.entities.User;
+import net.lahlalia.emp_api.repositories.RoleRepository;
+import net.lahlalia.emp_api.repositories.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class AuthenticationService {
+
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    public void register(RegistrationRequest request) {
+        var userRole= roleRepository.findByName("USER")
+                .orElseThrow(()-> new IllegalStateException("ROLE USER NOT initialized"));
+        var user = User.builder()
+                .name(request.getName())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .accountLocked(false)
+                .enabled(true)
+                .roles(List.of(userRole))
+                .build();
+        userRepository.save(user);
+
+    }
+}
