@@ -51,7 +51,7 @@ public class DepartementService {
             throw new DepartementNotFoundException("departement not found with specific id : " + idDep);
         }
         departementRepository.deleteById(idDep);
-        return false;
+        return true;
     }
 
 

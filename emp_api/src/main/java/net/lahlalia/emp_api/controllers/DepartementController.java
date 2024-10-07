@@ -4,6 +4,7 @@ package net.lahlalia.emp_api.controllers;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import net.lahlalia.emp_api.dtos.DepartementDto;
+import net.lahlalia.emp_api.exceptions.DepartementNotFoundException;
 import net.lahlalia.emp_api.services.DepartementService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,6 +34,20 @@ public class DepartementController {
     public ResponseEntity<DepartementDto>updateDepartement(@PathVariable Integer id,@RequestBody DepartementDto dto) throws EntityNotFoundException {
         DepartementDto updatedDep = departementService.updateDepartement(id,dto);
         return ResponseEntity.ok(updatedDep);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteDepartement(@PathVariable Integer id) {
+        try {
+            Boolean isDeleted = departementService.deleteDepartement(id);
+            if (isDeleted) {
+                return ResponseEntity.noContent().build();  // Return 204 No Content if deletion is successful
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(false);  // Return 500 if something went wrong
+            }
+        } catch (DepartementNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);  // Return 404 if the department is not found
+        }
     }
 
 
