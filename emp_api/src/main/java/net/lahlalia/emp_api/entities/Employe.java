@@ -4,6 +4,7 @@ package net.lahlalia.emp_api.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -40,6 +41,7 @@ public class Employe {
 
     @NotEmpty(message = "103")
     @NotNull(message = "103")
+    @Pattern(regexp = "^0[0-9]{9}$", message = "Le numéro de téléphone doit commencer par 0 et contenir exactement 10 chiffres.")
     private String telephone;
 
 

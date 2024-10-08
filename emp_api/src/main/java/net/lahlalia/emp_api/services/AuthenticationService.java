@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +31,8 @@ public class AuthenticationService {
         var user = User.builder()
                 .name(request.getName())
                 .email(request.getEmail())
+                .username(request.getUsername())
+                .phone(request.getPhone())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .accountLocked(false)
                 .enabled(true)

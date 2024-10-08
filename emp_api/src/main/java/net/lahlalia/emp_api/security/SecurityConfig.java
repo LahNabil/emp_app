@@ -32,7 +32,8 @@ public class SecurityConfig {
                         req.requestMatchers(
                                 "/api/v1/auth/**",
                                 "/api/v1/departement/**",
-                                "/api/v1/employe/**"
+                                "/api/v1/employe/**",
+                                "/api/v1/pointage/**"
                         ).permitAll()
                                 .anyRequest().authenticated()
                 )
