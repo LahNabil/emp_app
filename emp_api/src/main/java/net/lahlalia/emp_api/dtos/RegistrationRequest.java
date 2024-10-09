@@ -1,12 +1,9 @@
 package net.lahlalia.emp_api.dtos;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import jakarta.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
@@ -25,8 +22,9 @@ public class RegistrationRequest {
     @NotBlank(message = "username is mandatory")
     private String username;
 
-    @NotEmpty(message = "phone is mandatory")
-    @NotBlank(message = "phone is mandatory")
+    @NotEmpty(message = "103")
+    @NotNull(message = "103")
+    @Pattern(regexp = "^0[0-9]{9}$", message = "Le numéro de téléphone doit commencer par 0 et contenir exactement 10 chiffres.")
     private String phone;
 
     @NotEmpty(message = "password is mandatory")
