@@ -5,10 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './pages/register/register.component';
 import { AccueilComponent } from './pages/accueil/accueil.component';
 import { HeaderComponent } from './components/header/header.component';
+import {httpTokenInterceptor} from './interceptors/http-token.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,14 @@ import { HeaderComponent } from './components/header/header.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    HttpClient,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: httpTokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
