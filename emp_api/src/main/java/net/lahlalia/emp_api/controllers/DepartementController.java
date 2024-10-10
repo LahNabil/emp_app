@@ -4,6 +4,7 @@ package net.lahlalia.emp_api.controllers;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import net.lahlalia.emp_api.dtos.DepartementDto;
+import net.lahlalia.emp_api.dtos.PageResponse;
 import net.lahlalia.emp_api.exceptions.DepartementNotFoundException;
 import net.lahlalia.emp_api.services.DepartementService;
 import org.springframework.http.HttpStatus;
@@ -21,9 +22,11 @@ public class DepartementController {
     private final DepartementService departementService;
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<DepartementDto>> getAllDepartements(){
-        List<DepartementDto> departements = departementService.getAllDepartements();
-        return ResponseEntity.ok(departements);
+    public ResponseEntity<PageResponse<DepartementDto>> getAllDepartements(
+            @RequestParam(name = "page",defaultValue = "0", required = false) int page,
+            @RequestParam(name = "size", defaultValue = "10", required = false) int size
+    ){
+        return ResponseEntity.ok(departementService.getAllDepartements(page,size));
     }
     @PostMapping(value = "/",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DepartementDto> saveProduct(@RequestBody DepartementDto dto){

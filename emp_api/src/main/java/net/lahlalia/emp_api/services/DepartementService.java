@@ -3,10 +3,15 @@ package net.lahlalia.emp_api.services;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.lahlalia.emp_api.dtos.DepartementDto;
+import net.lahlalia.emp_api.dtos.PageResponse;
 import net.lahlalia.emp_api.entities.Departement;
 import net.lahlalia.emp_api.exceptions.DepartementNotFoundException;
 import net.lahlalia.emp_api.mappers.MapperDepartement;
 import net.lahlalia.emp_api.repositories.DepartementRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +25,25 @@ public class DepartementService {
     private final DepartementRepository departementRepository;
     private final MapperDepartement mapperDepartement;
 
-    public List<DepartementDto> getAllDepartements(){
-        return departementRepository.findAll().stream().map(mapperDepartement::toDto).toList();
+    public PageResponse<DepartementDto> getAllDepartements(int page, int size){
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
+        Page<Departement> departements = departementRepository.findAll(pageable);
+        List<DepartementDto> departementDtos = departements.stream().map(mapperDepartement::toDto).toList();
+        return new PageResponse<>(
+                departementDtos,
+                departements.getNumber(),
+                departements.getSize(),
+                departements.getTotalElements(),
+                departements.getTotalPages(),
+                departements.isFirst(),
+                departements.isLast()
+        );
+
+
+
+
+
+//        return departementRepository.findAll().stream().map(mapperDepartement::toDto).toList();
     }
 
     public DepartementDto saveDepartement(DepartementDto dto){

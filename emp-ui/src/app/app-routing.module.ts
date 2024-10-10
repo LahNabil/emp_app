@@ -8,8 +8,10 @@ import {AccueilComponent} from "./pages/accueil/accueil.component";
 const routes: Routes = [
   {path: 'login', component:LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'accueil', component: AccueilComponent},
-  // canActivate: [authGuard]},
+  {path: 'accueil', component: AccueilComponent, canActivate:[authGuard]},
+  {path: 'departement',
+  loadChildren:()=> import('./modules/departement/departement.module').then(m => m.DepartementModule)
+  }
 ];
 
 @NgModule({
