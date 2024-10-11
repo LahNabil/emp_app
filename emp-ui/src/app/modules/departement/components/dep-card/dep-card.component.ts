@@ -7,14 +7,8 @@ import {DepartementResponse} from "../../../../models/DepartementResponse";
   styleUrl: './dep-card.component.scss'
 })
 export class DepCardComponent {
-  get depCover(): string {
-    return this._depCover;
-  }
-
   private _dep: DepartementResponse = {};
-
-  private _depCover: string = "";
-
+  img: string = "https://cronuts.digital/wp-content/uploads/2023/12/6D03D.png"
 
   get dep(): DepartementResponse {
     return this._dep;
@@ -24,7 +18,6 @@ export class DepCardComponent {
   set dep(value: DepartementResponse) {
     this._dep = value;
   }
-
 
 
 }

@@ -5,6 +5,7 @@ import { DepartementRoutingModule } from './departement-routing.module';
 import { MainComponent } from './pages/main/main.component';
 import { DepartementListComponent } from './pages/departement-list/departement-list.component';
 import { DepCardComponent } from './components/dep-card/dep-card.component';
+import {SharedModuleModule} from "../shared-module/shared-module.module";
 
 
 
@@ -12,11 +13,15 @@ import { DepCardComponent } from './components/dep-card/dep-card.component';
   declarations: [
     MainComponent,
     DepartementListComponent,
-    DepCardComponent
+    DepCardComponent,
+
   ],
     imports: [
         CommonModule,
         DepartementRoutingModule,
+        SharedModuleModule
+    ],
+    exports:[
 
     ]
 })

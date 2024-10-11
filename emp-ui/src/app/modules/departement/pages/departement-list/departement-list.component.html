@@ -1,5 +1,9 @@
-<h3>Liste de departements</h3>
+<h3>Liste de départements</h3>
 <hr>
-<div class="d-flex justify-content-start gap-2 flex-wrap">
-  <app-dep-card [dep]="dep" *ngFor="let dep of departementResponse.content"></app-dep-card>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let dep of departementResponse.content">
+      <app-dep-card [dep]="dep"></app-dep-card>
+    </div>
+  </div>
 </div>

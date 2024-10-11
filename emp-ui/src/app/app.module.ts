@@ -8,8 +8,8 @@ import {FormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './pages/register/register.component';
 import { AccueilComponent } from './pages/accueil/accueil.component';
-import { HeaderComponent } from './components/header/header.component';
 import {httpTokenInterceptor} from './interceptors/http-token.interceptor';
+import {SharedModuleModule} from "./modules/shared-module/shared-module.module";
 
 
 @NgModule({
@@ -18,13 +18,14 @@ import {httpTokenInterceptor} from './interceptors/http-token.interceptor';
         LoginComponent,
         RegisterComponent,
         AccueilComponent,
-        HeaderComponent
+
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        SharedModuleModule
     ],
     providers: [
         HttpClient,
@@ -35,7 +36,7 @@ import {httpTokenInterceptor} from './interceptors/http-token.interceptor';
         }
     ],
     exports: [
-        HeaderComponent
+
     ],
     bootstrap: [AppComponent]
 })

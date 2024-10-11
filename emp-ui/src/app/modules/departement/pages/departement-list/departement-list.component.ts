@@ -10,7 +10,7 @@ import {PageResponseDepartement} from "../../../../models/PageResponseDepartemen
 })
 export class DepartementListComponent implements OnInit{
    page: number = 0;
-   size: number = 5;
+   size: number = 10;
    departementResponse: PageResponseDepartement = {};
 
   constructor(private departementService: DepartementService, private router: Router) {
