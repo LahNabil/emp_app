@@ -1,0 +1,26 @@
+//.container {
+//  background-image: url('/assets/images/livraison_logo.jpg');
+//  background-size: cover;
+//  background-position: center; /* Centers the image */
+//  background-repeat: no-repeat;
+//  height: 600px;
+//  width: 100%;
+//}
+:host {
+  display: block;
+  height: 80vh;
+  width: auto;
+  background-image: url("/assets/images/livraison_logo.jpg");
+  background-size: cover; /* Make sure the image covers the entire host area */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+
+
+.bienvenu{
+  text-align: center;
+  color: darkblue;
+  font-weight: bold;
+  padding-top: 10%;
+}

@@ -1,5 +1,5 @@
 <h3>Liste de departements</h3>
 <hr>
 <div class="d-flex justify-content-start gap-2 flex-wrap">
-  <span *ngFor="let dep of departementResponse.content">{{dep.nom}}</span>
+  <app-dep-card [dep]="dep" *ngFor="let dep of departementResponse.content"></app-dep-card>
 </div>

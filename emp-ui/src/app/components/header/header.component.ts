@@ -1,48 +1,24 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent {
 
   username?: string;
   user?: any;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
   }
-  ngOnInit() {
-    this.getUsername();
-    // this.getUser();
-  }
-  // getUser(){
-  //   this.userService.getUser().subscribe({
-  //       next:(res)=>{
-  //         this.username = res;
-  //         console.log(this.user);
-  //       },
-  //       error:(err)=>{
-  //         console.error('failed to get username', err);
-  //       }
-  //     }
-  //   )
-  // }
 
-  getUsername(){
-    this.userService.getUserName().subscribe({
-      next:(res)=>{
-        this.username = res;
-        console.log(this.username);
-      },
-      error:(err)=>{
-        console.error('failed to get username', err);
-      }
-      }
-    )
-  }
+
+
   logout() {
-    return null;
+    window.localStorage.removeItem('token');
+    this.router.navigate(['/login'])
   }
 }

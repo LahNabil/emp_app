@@ -20,8 +20,8 @@ export class AuthenticationService {
 
   register(regRequest: RegistrationRequest):Observable<any>{
     return this._http.post(`${this.baseUrl}auth/register`, regRequest);
-
   }
+
 
 
 }
