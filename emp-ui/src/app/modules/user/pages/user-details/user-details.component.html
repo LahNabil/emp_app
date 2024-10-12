@@ -1,0 +1,42 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg">
+        <div class="card-header text-center bg-primary text-white">
+          <h3>Mon Compte</h3>
+        </div>
+        <div class="">
+          <div class="d-flex flex-column align-items-center">
+            <!-- User Avatar (Optional) -->
+            <div class="avatar mb-3">
+              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="rounded-circle" alt="User Avatar">
+            </div>
+            <!-- Details -->
+            <ul class="list-group list-group-flush w-100">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Nom:</strong>
+                <span>{{ user.name }}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Nom de l'utilisateur:</strong>
+                <span>{{ user.name }}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Email:</strong>
+                <span>{{ user.email }}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Phone:</strong>
+                <span>{{ user.phone }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <button class="btn btn-primary">Edit</button>
+          <button class="btn btn-danger ms-2">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

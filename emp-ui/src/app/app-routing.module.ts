@@ -11,6 +11,9 @@ const routes: Routes = [
   {path: '', component: AccueilComponent, canActivate:[authGuard]},
   {path: 'departement', canActivate:[authGuard],
   loadChildren:()=> import('./modules/departement/departement.module').then(m => m.DepartementModule)
+  },
+  {path: 'user', canActivate:[authGuard],
+  loadChildren:()=> import('./modules/user/user.module').then(m=> m.UserModule)
   }
 ];
 

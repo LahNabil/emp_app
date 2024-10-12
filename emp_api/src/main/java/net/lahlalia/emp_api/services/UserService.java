@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import net.lahlalia.emp_api.dtos.UserDto;
 import net.lahlalia.emp_api.entities.User;
 import net.lahlalia.emp_api.mappers.MapperUser;
+import net.lahlalia.emp_api.repositories.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final MapperUser mapperUser;
+    private final UserRepository userRepository;
 
     public UserDto getAuthenticatedUser(){
 
@@ -41,15 +43,29 @@ public class UserService {
             return user.fullName();
         }
         return null;
-
     }
-//    public String getUsername() {
-//        User user = getAuthenticatedUser();
-//        return (user != null) ? user.getUsername() : null;  // This returns the email as per your User class
-//    }
+    public UserDto updateUser(UserDto updatedUserDto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-//    public String getUsername(){
-//        UserDetails userDetails = getAuthenticatedUser();
-//        return (userDetails != null) ? userDetails.getUsername() : null;
-//    }
+        if (authentication != null && authentication.getPrincipal() instanceof User) {
+            User currentUser = (User) authentication.getPrincipal();
+
+            // Optionally fetch the user from the repository to ensure it's up-to-date
+            User user = userRepository.findById(currentUser.getId())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
+            // Update user fields based on input from the UserDto
+            user.setName(updatedUserDto.getName());
+            user.setEmail(updatedUserDto.getEmail());
+            user.setPhone(updatedUserDto.getPhone());
+            user.setUsername(updatedUserDto.getUsername());
+            // Add other fields as neede
+            user = userRepository.save(user);
+
+            return mapperUser.toDto(user);
+        }
+
+        throw new RuntimeException("User is not authenticated");
+    }
+
 }

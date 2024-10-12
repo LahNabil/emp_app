@@ -7,9 +7,7 @@ import net.lahlalia.emp_api.services.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -30,7 +28,14 @@ public class UserController {
     }
 
     @GetMapping("/details")
-    public UserDto getDetails(){
-        return userService.getAuthenticatedUser();
+    public ResponseEntity<UserDto> getDetails(){
+        UserDto userDto =userService.getAuthenticatedUser();
+        return ResponseEntity.ok(userDto);
     }
+    @PutMapping("/")
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
+        UserDto updatedUser = userService.updateUser(userDto);
+        return ResponseEntity.ok(updatedUser);
+    }
+
 }

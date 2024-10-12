@@ -9,16 +9,13 @@ import {Router} from "@angular/router";
 })
 export class HeaderComponent {
 
-  username?: string;
   user?: any;
-
   constructor(private userService: UserService, private router: Router) {
   }
-
-
 
   logout() {
     window.localStorage.removeItem('token');
     this.router.navigate(['/login'])
   }
+
 }

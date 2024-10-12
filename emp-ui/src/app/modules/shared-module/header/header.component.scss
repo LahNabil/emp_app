@@ -19,3 +19,9 @@ li > a {
   padding-left: 5%;
   padding-right: 5%;
 }
+.user{
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Keeps the current color */
+    font-weight: bold; /* Makes the text bold */
+
+}
