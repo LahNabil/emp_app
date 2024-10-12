@@ -1,7 +1,10 @@
 <app-header></app-header>
+<div class="layout">
+<app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
 <div class="container">
   <span>
     <h1 class="bienvenu">Bienvenu {{username}}</h1>
   </span>
+</div>
 </div>
 

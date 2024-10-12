@@ -1,13 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user/user.service";
 
+interface SideNavToggle{
+  screenWidth: number;
+  collapsed: boolean;
+}
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.component.html',
-  styleUrl: './accueil.component.scss'
+  styleUrls:['./accueil.component.scss']
 })
+
 export class AccueilComponent implements OnInit{
   username?: string;
+  isSideNavCollapsed = false;
+  screenWidth =0;
 
   constructor(private userService: UserService) {
   }
@@ -27,4 +34,8 @@ export class AccueilComponent implements OnInit{
     )
   }
 
+  onToggleSideNav(data: SideNavToggle): void {
+    this.screenWidth = data.screenWidth;
+    this.isSideNavCollapsed = data.collapsed;
+  }
 }

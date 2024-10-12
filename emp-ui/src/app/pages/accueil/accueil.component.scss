@@ -16,6 +16,12 @@
   background-repeat: no-repeat; /* Prevents the image from repeating */
 }
 
+.layout {
+  display: flex;
+  min-height: 100vh; /* Full viewport height */
+}
+
+
 
 
 .bienvenu{

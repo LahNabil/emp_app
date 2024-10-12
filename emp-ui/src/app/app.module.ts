@@ -25,7 +25,7 @@ import {SharedModuleModule} from "./modules/shared-module/shared-module.module";
         AppRoutingModule,
         FormsModule,
         HttpClientModule,
-        SharedModuleModule
+        SharedModuleModule,
     ],
     providers: [
         HttpClient,
