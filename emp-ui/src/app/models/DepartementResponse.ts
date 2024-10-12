@@ -1,4 +1,4 @@
 export interface DepartementResponse {
-  id?: number
+  idDep?: number
   nom?: string;
 }

@@ -45,6 +45,15 @@ public class DepartementService {
 
 //        return departementRepository.findAll().stream().map(mapperDepartement::toDto).toList();
     }
+    public DepartementDto getDepartementById(Integer idDep){
+        if(idDep == null){
+            log.error("id is null");
+            return null;
+        }
+        Departement departement = departementRepository.findById(idDep).get();
+        DepartementDto departementDto = mapperDepartement.toDto(departement);
+        return departementDto;
+    }
 
     public DepartementDto saveDepartement(DepartementDto dto){
         if(dto == null){

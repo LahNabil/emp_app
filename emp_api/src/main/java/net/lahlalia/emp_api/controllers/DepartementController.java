@@ -28,6 +28,12 @@ public class DepartementController {
     ){
         return ResponseEntity.ok(departementService.getAllDepartements(page,size));
     }
+    @GetMapping(value = "/{idDep}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<DepartementDto>getDepById(@PathVariable Integer idDep){
+        DepartementDto departementDto =departementService.getDepartementById(idDep);
+        return ResponseEntity.ok(departementDto);
+    }
+
     @PostMapping(value = "/",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DepartementDto> saveProduct(@RequestBody DepartementDto dto){
         DepartementDto savedDep = departementService.saveDepartement(dto);

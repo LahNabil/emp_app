@@ -6,6 +6,8 @@ import { MainComponent } from './pages/main/main.component';
 import { DepartementListComponent } from './pages/departement-list/departement-list.component';
 import { DepCardComponent } from './components/dep-card/dep-card.component';
 import {SharedModuleModule} from "../shared-module/shared-module.module";
+import { ManageDepartementsComponent } from './pages/manage-departements/manage-departements.component';
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -14,13 +16,15 @@ import {SharedModuleModule} from "../shared-module/shared-module.module";
     MainComponent,
     DepartementListComponent,
     DepCardComponent,
+    ManageDepartementsComponent,
 
   ],
-    imports: [
-        CommonModule,
-        DepartementRoutingModule,
-        SharedModuleModule
-    ],
+  imports: [
+    CommonModule,
+    DepartementRoutingModule,
+    SharedModuleModule,
+    FormsModule
+  ],
     exports:[
 
     ]

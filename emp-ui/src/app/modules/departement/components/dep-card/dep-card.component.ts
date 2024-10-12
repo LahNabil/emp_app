@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {DepartementResponse} from "../../../../models/DepartementResponse";
 
 @Component({
@@ -10,6 +10,8 @@ export class DepCardComponent {
   private _dep: DepartementResponse = {};
   img: string = "https://cronuts.digital/wp-content/uploads/2023/12/6D03D.png"
 
+  @Output() private edit: EventEmitter<DepartementResponse> = new EventEmitter<DepartementResponse>();
+
   get dep(): DepartementResponse {
     return this._dep;
   }
@@ -20,4 +22,8 @@ export class DepCardComponent {
   }
 
 
+  onEdit() {
+    this.edit.emit(this._dep);
+
+  }
 }

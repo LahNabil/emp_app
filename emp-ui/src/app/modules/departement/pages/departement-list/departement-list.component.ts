@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DepartementService} from "../../service/departement.service";
 import {Router} from "@angular/router";
 import {PageResponseDepartement} from "../../../../models/PageResponseDepartement";
+import {DepartementResponse} from "../../../../models/DepartementResponse";
 
 @Component({
   selector: 'app-departement-list',
@@ -10,8 +11,9 @@ import {PageResponseDepartement} from "../../../../models/PageResponseDepartemen
 })
 export class DepartementListComponent implements OnInit{
    page: number = 0;
-   size: number = 10;
+   size: number = 3;
    departementResponse: PageResponseDepartement = {};
+
 
   constructor(private departementService: DepartementService, private router: Router) {
 
@@ -26,8 +28,48 @@ export class DepartementListComponent implements OnInit{
       .subscribe({
         next: (departements)=>{
           this.departementResponse = departements;
+          console.log(departements);
         }
       })
+
+  }
+
+  goToFirstPage() {
+    this.page = 0;
+    this.getAllDepartements();
+
+  }
+
+  goToPreviousPage() {
+    this.page--;
+    this.getAllDepartements();
+
+  }
+
+  goToPage(index: number) {
+    this.page = index;
+    this.getAllDepartements();
+
+  }
+
+  goToNextPage() {
+    this.page ++;
+    this.getAllDepartements();
+
+  }
+
+  goToLastPage() {
+    this.page = this.departementResponse.totalPages as number - 1;
+    this.getAllDepartements();
+
+  }
+
+  isLastPage() {
+    return this.page == this.departementResponse.totalPages as number - 1;
+  }
+
+  editDepartement(dep: DepartementResponse) {
+    this.router.navigate(['departement', 'manage', dep.idDep])
 
   }
 }

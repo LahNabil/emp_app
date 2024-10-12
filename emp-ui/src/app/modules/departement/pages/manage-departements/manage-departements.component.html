@@ -1,0 +1,24 @@
+
+<div class="p-2">
+  <h2>Gerer Departement</h2>
+  <hr>
+  <div class="container">
+  <div class="alert alert-danger mt-2" role="alert" *ngIf="errorMsg.length">
+    <p class="p-0 m-0" *ngFor="let msg of errorMsg">{{msg}}</p>
+  </div>
+    <form class="row g-3">
+      <div>
+        <label for="nom" class="form-label">nom</label>
+        <input [(ngModel)]="depResponse.nom" name="nom" type="text" class="form-control" id="nom" placeholder="Nom du Departement">
+      </div>
+      <div class="">
+        <button (click)="saveDep()" type="submit" class="btn btn-outline-primary">
+          <i class="fas fa-save"></i>&nbsp; Ajouter
+        </button>
+        <a routerLink="/departement" class="btn btn-link text-danger">
+          <i class="fas fa-times"></i>&nbsp; Annuler
+        </a>
+      </div>
+    </form>
+</div>
+</div>
