@@ -27,25 +27,13 @@ public class Employe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEmp;
 
-    @NotEmpty(message = "100")
-    @NotNull(message = "100")
+    @Column(unique = true)
     private String nom;
-
-    @NotEmpty(message = "101")
-    @NotNull(message = "101")
     private String prenom;
-
-    @NotEmpty(message = "102")
-    @NotNull(message = "102")
+    @Column(unique = true)
     private String cin;
-
-    @NotEmpty(message = "103")
-    @NotNull(message = "103")
-    @Pattern(regexp = "^0[0-9]{9}$", message = "Le numéro de téléphone doit commencer par 0 et contenir exactement 10 chiffres.")
+    @Column(unique = true)
     private String telephone;
-
-
-    @NotNull(message = "104")
     private double salaireBase;
 
     @CreatedDate
@@ -68,6 +56,5 @@ public class Employe {
 
     @ManyToOne
     @JoinColumn(name = "idDep")
-    @NotNull(message = "105")
     private Departement departement;
 }

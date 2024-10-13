@@ -24,8 +24,7 @@ public class Departement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDep;
-    @NotEmpty(message = "100")
-    @NotNull(message = "100")
+    @Column(unique = true)
     private String nom;
     @CreatedDate
     @Column(nullable = false, updatable = false)

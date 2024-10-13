@@ -12,7 +12,7 @@ import lombok.*;
 public class DepartementDto {
 
     private Integer idDep;
-    @NotEmpty(message = "100")
-    @NotNull(message = "100")
+    @NotEmpty(message = "Nom ne doit pas etre vide")
+    @NotNull(message = "La valeur de ce champ est requise")
     private String nom;
 }

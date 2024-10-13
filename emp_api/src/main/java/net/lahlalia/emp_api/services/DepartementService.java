@@ -38,7 +38,10 @@ public class DepartementService {
                 departements.isFirst(),
                 departements.isLast()
         );
-//        return departementRepository.findAll().stream().map(mapperDepartement::toDto).toList();
+   }
+    public List<DepartementDto> getAllDeps(){
+        return departementRepository.findAll().stream().map(mapperDepartement::toDto).toList();
+
     }
     public DepartementDto getDepartementById(Integer idDep){
         if(idDep == null){
@@ -46,8 +49,7 @@ public class DepartementService {
             return null;
         }
         Departement departement = departementRepository.findById(idDep).get();
-        DepartementDto departementDto = mapperDepartement.toDto(departement);
-        return departementDto;
+        return mapperDepartement.toDto(departement);
     }
 
     public DepartementDto saveDepartement(DepartementDto dto){

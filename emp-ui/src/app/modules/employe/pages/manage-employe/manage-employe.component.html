@@ -2,8 +2,8 @@
   <h2>Gérer Employé</h2>
   <hr>
   <div class="container">
-    <div class="alert alert-danger mt-2" role="alert" *ngIf="errorMsg.length">
-      <p class="p-0 m-0" *ngFor="let msg of errorMsg">{{msg}}</p>
+    <div class="alert alert-danger" role="alert" *ngIf="errorMsg.length">
+      <p *ngFor="let msg of errorMsg">{{msg}}</p>
     </div>
 
     <!-- Form Start -->
@@ -36,13 +36,16 @@
         </div>
         <div>
           <label for="idSuperviseur" class="form-label">Superviseur</label>
-          <input [(ngModel)]="empResponse.idSuperviseur" name="idSuperviseur" type="text" class="form-control" id="idSuperviseur" placeholder="5">
+          <select [(ngModel)]="empResponse.idSuperviseur" name="idSuperviseur" type="text" class="form-select" id="idSuperviseur" aria-label="Default select example">
+            <option *ngFor="let emp of empList" [value]="emp.idEmp">{{emp.idEmp}} {{emp.nom}}</option>
+          </select>
         </div>
         <div>
           <label for="idDep" class="form-label">Département</label>
-          <input [(ngModel)]="empResponse.idDep" name="idDep" type="text" class="form-control" id="idDep" placeholder="IT">
+          <select [(ngModel)]="empResponse.idDep" name="idDep" type="text" class="form-select" id="idDep" aria-label="Default select example" >
+          <option *ngFor="let dep of depList" [value]="dep.idDep">{{dep.idDep}} {{dep.nom}}</option>
+          </select>
         </div>
-        <!-- You can add more fields as necessary -->
       </div>
 
       <!-- Buttons (Full Width) -->

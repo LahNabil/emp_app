@@ -2,7 +2,6 @@ package net.lahlalia.emp_api.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.lahlalia.emp_api.dtos.DepartementDto;
 import net.lahlalia.emp_api.dtos.EmployeDto;
 import net.lahlalia.emp_api.dtos.PageResponse;
 import net.lahlalia.emp_api.entities.Departement;

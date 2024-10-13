@@ -19,8 +19,13 @@ export class EmployeService {
     return this._http.get<PageResponseEmploye>(`${this.baseUrl}employe/`, {params});
   }
 
+  getEmpAll():Observable<any>{
+    return this._http.get(`${this.baseUrl}employe/all`);
+  }
+
   saveEmploye(emp: EmployeResponse):Observable<Object>{
     return this._http.post(`${this.baseUrl}employe/`, emp);
   }
+
 
 }

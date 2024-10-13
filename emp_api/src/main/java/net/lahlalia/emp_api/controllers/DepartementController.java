@@ -2,6 +2,7 @@ package net.lahlalia.emp_api.controllers;
 
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import net.lahlalia.emp_api.dtos.DepartementDto;
 import net.lahlalia.emp_api.dtos.PageResponse;
@@ -21,6 +22,12 @@ public class DepartementController {
 
     private final DepartementService departementService;
 
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<DepartementDto>> getAllDeps(){
+        List<DepartementDto> dtos = departementService.getAllDeps();
+        return ResponseEntity.ok(dtos);
+    }
+
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PageResponse<DepartementDto>> getAllDepartements(
             @RequestParam(name = "page",defaultValue = "0", required = false) int page,
@@ -35,12 +42,12 @@ public class DepartementController {
     }
 
     @PostMapping(value = "/",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DepartementDto> saveProduct(@RequestBody DepartementDto dto){
+    public ResponseEntity<DepartementDto> saveProduct(@RequestBody @Valid DepartementDto dto){
         DepartementDto savedDep = departementService.saveDepartement(dto);
         return new ResponseEntity<>(savedDep, HttpStatus.CREATED);
     }
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DepartementDto>updateDepartement(@PathVariable Integer id,@RequestBody DepartementDto dto) throws EntityNotFoundException {
+    public ResponseEntity<DepartementDto>updateDepartement(@PathVariable Integer id,@RequestBody @Valid DepartementDto dto) throws EntityNotFoundException {
         DepartementDto updatedDep = departementService.updateDepartement(id,dto);
         return ResponseEntity.ok(updatedDep);
     }

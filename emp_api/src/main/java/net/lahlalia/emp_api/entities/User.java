@@ -29,8 +29,11 @@ public class User implements UserDetails, Principal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @Column(unique = true)
     private String username;
+    @Column(unique = true)
     private String email;
+    @Column(unique = true)
     private String phone;
     private String password;
     private boolean accountLocked;

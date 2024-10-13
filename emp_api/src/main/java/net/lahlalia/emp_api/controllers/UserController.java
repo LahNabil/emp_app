@@ -1,5 +1,6 @@
 package net.lahlalia.emp_api.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import net.lahlalia.emp_api.dtos.UserDto;
 import net.lahlalia.emp_api.services.AuthenticationService;
@@ -33,7 +34,7 @@ public class UserController {
         return ResponseEntity.ok(userDto);
     }
     @PutMapping("/")
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> updateUser(@RequestBody @Valid UserDto userDto) {
         UserDto updatedUser = userService.updateUser(userDto);
         return ResponseEntity.ok(updatedUser);
     }

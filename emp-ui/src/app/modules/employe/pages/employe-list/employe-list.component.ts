@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 export class EmployeListComponent implements OnInit{
 
   page: number = 0;
-  size: number = 5;
+  size: number = 4;
   employePageReponse: PageResponseEmploye = {};
 
   constructor(private employeService: EmployeService, private router: Router) {

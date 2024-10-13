@@ -1,6 +1,7 @@
 package net.lahlalia.emp_api.controllers;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import net.lahlalia.emp_api.dtos.EmployeDto;
 import net.lahlalia.emp_api.dtos.PageResponse;
@@ -36,7 +37,7 @@ public class EmployeController {
     }
 
     @PostMapping(value = "/",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<EmployeDto> saveEmploye(@RequestBody EmployeDto dto){
+    public ResponseEntity<EmployeDto> saveEmploye(@RequestBody @Valid EmployeDto dto){
         EmployeDto savedEmp = employeService.saveEmploye(dto);
         return new ResponseEntity<>(savedEmp, HttpStatus.CREATED);
     }
@@ -54,7 +55,7 @@ public class EmployeController {
         }
     }
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<EmployeDto>updateEmploye(@PathVariable Integer id, @RequestBody EmployeDto dto) throws EntityNotFoundException {
+    public ResponseEntity<EmployeDto>updateEmploye(@PathVariable Integer id, @RequestBody @Valid EmployeDto dto) throws EntityNotFoundException {
         EmployeDto updatedEmp = employeService.updateEmploye(id,dto);
         return ResponseEntity.ok(updatedEmp);
     }
