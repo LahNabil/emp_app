@@ -2,13 +2,19 @@ package net.lahlalia.emp_api.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.lahlalia.emp_api.dtos.DepartementDto;
 import net.lahlalia.emp_api.dtos.EmployeDto;
+import net.lahlalia.emp_api.dtos.PageResponse;
 import net.lahlalia.emp_api.entities.Departement;
 import net.lahlalia.emp_api.entities.Employe;
 import net.lahlalia.emp_api.exceptions.EmployeNotFoundException;
 import net.lahlalia.emp_api.mappers.MapperEmploye;
 import net.lahlalia.emp_api.repositories.DepartementRepository;
 import net.lahlalia.emp_api.repositories.EmployeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -21,9 +27,29 @@ public class EmployeService {
     private final EmployeRepository employeRepository;
     private final DepartementRepository departementRepository;
 
-    public List<EmployeDto> getAllEmployes(){
+    public List<EmployeDto> getAllEmp(){
         return employeRepository.findAll().stream().map(mapperEmploye::toDto).toList();
     }
+    public PageResponse<EmployeDto> getAllEmployes(int page, int size){
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
+        Page<Employe> employes = employeRepository.findAll(pageable);
+        List<EmployeDto> employeDtos = employes.stream()
+                .map(employe-> {
+                    EmployeDto dto = mapperEmploye.toDto(employe);
+                    dto.setIdDep(employe.getDepartement() != null ? employe.getDepartement().getIdDep() : null);
+                    dto.setNomDep(employe.getDepartement()!= null ? employe.getDepartement().getNom() : null);
+                    return dto;
+                }).toList();
+        return new PageResponse<>(
+                employeDtos,
+                employes.getNumber(),
+                employes.getSize(),
+                employes.getTotalElements(),
+                employes.getTotalPages(),
+                employes.isFirst(),
+                employes.isLast()
+        );
+     }
 
     public EmployeDto saveEmploye(EmployeDto dto) {
         if (dto == null) {

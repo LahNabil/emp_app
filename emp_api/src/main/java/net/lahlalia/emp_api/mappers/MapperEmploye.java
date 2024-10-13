@@ -18,7 +18,5 @@ public class MapperEmploye {
     }
     public EmployeDto toDto(Employe employe){
         return mapper.map(employe, EmployeDto.class);
-
-
     }
 }

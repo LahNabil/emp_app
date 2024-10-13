@@ -3,6 +3,7 @@ package net.lahlalia.emp_api.controllers;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import net.lahlalia.emp_api.dtos.EmployeDto;
+import net.lahlalia.emp_api.dtos.PageResponse;
 import net.lahlalia.emp_api.exceptions.DepartementNotFoundException;
 import net.lahlalia.emp_api.services.EmployeService;
 import org.springframework.http.HttpStatus;
@@ -19,10 +20,19 @@ public class EmployeController {
 
     private final EmployeService employeService;
 
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<EmployeDto>>getAllEmp(){
+        List<EmployeDto> employeDtos = employeService.getAllEmp();
+        return ResponseEntity.ok(employeDtos);
+    }
+
+
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<EmployeDto>> getAllEmployes(){
-        List<EmployeDto> employes = employeService.getAllEmployes();
-        return ResponseEntity.ok(employes);
+    public ResponseEntity<PageResponse<EmployeDto>> getAllEmployes(
+            @RequestParam(name = "page",defaultValue = "0", required = false) int page,
+            @RequestParam(name = "size", defaultValue = "10", required = false) int size
+    ){
+        return ResponseEntity.ok(employeService.getAllEmployes(page,size));
     }
 
     @PostMapping(value = "/",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

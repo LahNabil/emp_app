@@ -1,0 +1,61 @@
+<div class="p-2">
+  <h2>Gérer Employé</h2>
+  <hr>
+  <div class="container">
+    <div class="alert alert-danger mt-2" role="alert" *ngIf="errorMsg.length">
+      <p class="p-0 m-0" *ngFor="let msg of errorMsg">{{msg}}</p>
+    </div>
+
+    <!-- Form Start -->
+    <form class="row g-3">
+      <!-- Left Side (4 Labels) -->
+      <div class="col-md-6">
+        <div>
+          <label for="nom" class="form-label">Nom</label>
+          <input [(ngModel)]="empResponse.nom" name="nom" type="text" class="form-control" id="nom" placeholder="Jhon">
+        </div>
+        <div>
+          <label for="prenom" class="form-label">Prénom</label>
+          <input [(ngModel)]="empResponse.prenom" name="prenom" type="text" class="form-control" id="prenom" placeholder="Doe">
+        </div>
+        <div>
+          <label for="cin" class="form-label">CIN</label>
+          <input [(ngModel)]="empResponse.cin" name="cin" type="text" class="form-control" id="cin" placeholder="J56718">
+        </div>
+        <div>
+          <label for="telephone" class="form-label">Téléphone</label>
+          <input [(ngModel)]="empResponse.telephone" name="telephone" type="text" class="form-control" id="telephone" placeholder="0610203040">
+        </div>
+      </div>
+
+      <!-- Right Side (4 Labels) -->
+      <div class="col-md-6">
+        <div>
+          <label for="salaireBase" class="form-label">Salaire de Base</label>
+          <input [(ngModel)]="empResponse.salaireBase" name="salaireBase" type="text" class="form-control" id="salaireBase" placeholder="5000">
+        </div>
+        <div>
+          <label for="idSuperviseur" class="form-label">Superviseur</label>
+          <input [(ngModel)]="empResponse.idSuperviseur" name="idSuperviseur" type="text" class="form-control" id="idSuperviseur" placeholder="5">
+        </div>
+        <div>
+          <label for="idDep" class="form-label">Département</label>
+          <input [(ngModel)]="empResponse.idDep" name="idDep" type="text" class="form-control" id="idDep" placeholder="IT">
+        </div>
+        <!-- You can add more fields as necessary -->
+      </div>
+
+      <!-- Buttons (Full Width) -->
+      <div class="col-12">
+        <button (click)="saveEmp()" type="submit" class="btn btn-outline-primary">
+          <i class="fas fa-save"></i>&nbsp; Enregistrer
+        </button>
+        <a routerLink="/employe" class="btn btn-link text-danger">
+          <i class="fas fa-times"></i>&nbsp; Annuler
+        </a>
+      </div>
+    </form>
+    <!-- Form End -->
+
+  </div>
+</div>

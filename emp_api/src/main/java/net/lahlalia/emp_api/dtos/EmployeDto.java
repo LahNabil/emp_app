@@ -3,10 +3,6 @@ package net.lahlalia.emp_api.dtos;
 
 import lombok.*;
 
-import net.lahlalia.emp_api.entities.Employe;
-
-import java.util.List;
-
 @Getter
 @Setter
 @Builder
@@ -23,5 +19,6 @@ public class EmployeDto {
     private double salaireBase;
     private Integer idSuperviseur;
     private Integer idDep;
+    private String nomDep;
 
 }

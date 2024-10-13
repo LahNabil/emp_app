@@ -54,12 +54,11 @@ public class UserService {
             User user = userRepository.findById(currentUser.getId())
                     .orElseThrow(() -> new RuntimeException("User not found"));
 
-            // Update user fields based on input from the UserDto
             user.setName(updatedUserDto.getName());
-            user.setEmail(updatedUserDto.getEmail());
+            user.setEmail(updatedUserDto.getUsername());
             user.setPhone(updatedUserDto.getPhone());
-            user.setUsername(updatedUserDto.getUsername());
-            // Add other fields as neede
+            user.setUsername(updatedUserDto.getEmail());
+
             user = userRepository.save(user);
 
             return mapperUser.toDto(user);

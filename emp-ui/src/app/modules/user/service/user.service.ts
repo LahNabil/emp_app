@@ -15,4 +15,8 @@ export class UserService {
   public getUserDetails():Observable<RegistrationRequest>{
     return this._http.get<RegistrationRequest>(`${this.baseUrl}user/details`);
   }
+
+  public updateUser(request: RegistrationRequest):Observable<RegistrationRequest>{
+    return this._http.put<RegistrationRequest>(`${this.baseUrl}user/`, request);
+  }
 }

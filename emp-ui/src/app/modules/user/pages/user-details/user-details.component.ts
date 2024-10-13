@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../service/user.service";
 import {RegistrationRequest} from "../../../../models/RegistrationRequest";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-details',
@@ -11,7 +12,7 @@ export class UserDetailsComponent implements OnInit{
 
   user: RegistrationRequest = {name: '',email: '',phone: '',username: ''};
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
   }
   ngOnInit() {
     this.getUserDetails();
@@ -28,4 +29,7 @@ export class UserDetailsComponent implements OnInit{
     })
   }
 
+  updateUser() {
+    this.router.navigate(['user','update'])
+  }
 }

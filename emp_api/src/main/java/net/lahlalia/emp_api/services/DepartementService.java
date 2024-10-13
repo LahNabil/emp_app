@@ -38,11 +38,6 @@ public class DepartementService {
                 departements.isFirst(),
                 departements.isLast()
         );
-
-
-
-
-
 //        return departementRepository.findAll().stream().map(mapperDepartement::toDto).toList();
     }
     public DepartementDto getDepartementById(Integer idDep){

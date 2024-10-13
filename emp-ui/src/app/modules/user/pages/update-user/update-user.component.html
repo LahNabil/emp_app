@@ -1,0 +1,41 @@
+<div class="p-2">
+  <h2>Modifier Compte</h2>
+  <hr>
+  <div class="container">
+    <div class="alert alert-danger mt-2" role="alert" *ngIf="errorMsg.length">
+      <p class="p-0 m-0" *ngFor="let msg of errorMsg">{{msg}}</p>
+    </div>
+    <!-- Use (ngSubmit) for form submission -->
+    <form class="row g-3" (ngSubmit)="updateUser()">
+      <div>
+        <label for="nom" class="form-label">Nom</label>
+        <!-- Ensure that the name is unique and corresponds to the model field -->
+        <input [(ngModel)]="userRep.name" name="name" type="text" class="form-control" id="nom" placeholder="Nom">
+      </div>
+      <div>
+        <label for="username" class="form-label">Nom d'utilisateur</label>
+        <!-- Correct the name attribute to match the model field -->
+        <input [(ngModel)]="userRep.username" name="username" type="text" class="form-control" id="username" readonly>
+      </div>
+      <div>
+        <label for="email" class="form-label">Email</label>
+        <!-- Make sure name attribute is unique and matches 'email' in model -->
+        <input [(ngModel)]="userRep.email" name="email" type="email" class="form-control" id="email" readonly>
+      </div>
+      <div>
+        <label for="phone" class="form-label">Numéro de téléphone</label>
+        <!-- Correct the name attribute to 'phone' -->
+        <input [(ngModel)]="userRep.phone" name="phone" type="text" class="form-control" id="phone" placeholder="0689988998">
+      </div>
+      <div class="mt-3">
+        <!-- Use type="submit" to trigger ngSubmit -->
+        <button type="submit" class="btn btn-outline-primary">
+          <i class="fas fa-save"></i>&nbsp; Enregistrer
+        </button>
+        <a routerLink="/user" class="btn btn-link text-danger">
+          <i class="fas fa-times"></i>&nbsp; Annuler
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
