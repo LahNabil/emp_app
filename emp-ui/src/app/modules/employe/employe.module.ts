@@ -7,13 +7,15 @@ import { EmployeListComponent } from './pages/employe-list/employe-list.componen
 import {SharedModuleModule} from "../shared-module/shared-module.module";
 import { ManageEmployeComponent } from './pages/manage-employe/manage-employe.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { PointageComponent } from './pages/pointage/pointage.component';
 
 
 @NgModule({
   declarations: [
     MainComponent,
     EmployeListComponent,
-    ManageEmployeComponent
+    ManageEmployeComponent,
+    PointageComponent
   ],
   imports: [
     CommonModule,

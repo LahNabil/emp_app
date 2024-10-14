@@ -4,6 +4,7 @@ import {MainComponent} from "./pages/main/main.component";
 import {EmployeListComponent} from "./pages/employe-list/employe-list.component";
 import {ManageEmployeComponent} from "./pages/manage-employe/manage-employe.component";
 import {ManageDepartementsComponent} from "../departement/pages/manage-departements/manage-departements.component";
+import {PointageComponent} from "./pages/pointage/pointage.component";
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
       {
         path: '',
         component: EmployeListComponent
+      },
+      {
+        path: 'pointage',
+        component: PointageComponent
       },
       {
         path: 'manage',
