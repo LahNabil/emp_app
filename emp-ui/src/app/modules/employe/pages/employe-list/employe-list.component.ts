@@ -67,4 +67,8 @@ export class EmployeListComponent implements OnInit{
   }
 
 
+  onEdit(idEmp: number | undefined) {
+    this.router.navigate(['employe', 'manage', idEmp])
+
+  }
 }

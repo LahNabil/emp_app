@@ -35,6 +35,11 @@ public class EmployeController {
     ){
         return ResponseEntity.ok(employeService.getAllEmployes(page,size));
     }
+    @GetMapping(value = "/{idEmp}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<EmployeDto>getEmpById(@PathVariable Integer idEmp){
+        EmployeDto employeDto =employeService.getEmployeById(idEmp);
+        return ResponseEntity.ok(employeDto);
+    }
 
     @PostMapping(value = "/",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<EmployeDto> saveEmploye(@RequestBody @Valid EmployeDto dto){

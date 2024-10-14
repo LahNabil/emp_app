@@ -33,7 +33,7 @@
       <td>{{ employe.nomDep }}</td>
       <td>
         <div class="d-flex gap-2">
-          <i class="fas fa-edit text-success"></i>
+          <i (click)="onEdit(employe.idEmp)" class="fas fa-edit text-success"></i>
           <i class="fas fa-archive text-danger"></i>
         </div>
       </td>

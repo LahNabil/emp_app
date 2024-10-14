@@ -88,6 +88,17 @@ public class EmployeService {
 
 
     }
+    public EmployeDto getEmployeById(Integer idEmp){
+        if(idEmp == null){
+            log.error("id is null");
+            return null;
+        }
+        Employe employe = employeRepository.findById(idEmp).get();
+        EmployeDto dto = mapperEmploye.toDto(employe);
+        dto.setIdDep(employe.getDepartement() != null ? employe.getDepartement().getIdDep() : null);
+        dto.setIdSuperviseur(employe.getSuperviseur() != null ? employe.getSuperviseur().getIdEmp() : null);
+        return dto;
+    }
 
     public Boolean deleteEmp(Integer idEmp) throws EmployeNotFoundException {
         Employe employe = employeRepository.findById(idEmp)

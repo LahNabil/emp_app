@@ -1,6 +1,7 @@
 package net.lahlalia.emp_api.dtos;
 
 
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -33,6 +34,7 @@ public class EmployeDto {
     @Pattern(regexp = "^0[0-9]{9}$", message = "Le numéro de téléphone doit commencer par 0 et contenir exactement 10 chiffres.")
     private String telephone;
 
+    @DecimalMin(value = "0.0", inclusive = false)
     private double salaireBase;
 
     @NotNull(message = "Veuillez saisir un Superviseur")

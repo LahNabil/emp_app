@@ -19,6 +19,26 @@ export class ManageEmployeComponent implements OnInit{
   constructor(private employeService: EmployeService, private router: Router, private activatedRoute: ActivatedRoute, private sharedService: SharedService) {
   }
   ngOnInit() {
+    const idEmp = this.activatedRoute.snapshot.params['idEmp'];
+    if (idEmp){
+      this.employeService.getEmployeById(idEmp).subscribe({
+        next:(res)=>{
+          this.empResponse = {
+            idEmp: res.idEmp,
+            nom: res.nom as string,
+            prenom: res.prenom as string,
+            cin: res.cin as string,
+            telephone: res.telephone as string,
+            salaireBase: res.salaireBase,
+            idSuperviseur: res.idSuperviseur,
+            idDep: res.idDep
+          };
+        }
+      })
+
+    }
+
+
     this.getAllEmp();
     this.getAllDep();
   }

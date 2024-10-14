@@ -12,6 +12,10 @@ export class EmployeService {
   constructor(private _http: HttpClient) { }
   private baseUrl = environment.apiEmp;
 
+  getEmployeById(idEmp: number):Observable<EmployeResponse>{
+    return this._http.get<EmployeResponse>(`${this.baseUrl}employe/${idEmp}`);
+  }
+
   getAllEmployes(page: number, size: number):Observable<PageResponseEmploye>{
     const params = new HttpParams()
       .set('page', page.toString())
