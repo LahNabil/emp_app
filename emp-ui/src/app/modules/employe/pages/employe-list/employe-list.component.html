@@ -7,6 +7,10 @@
 </div>
 
 <div class="container-fluid">
+  <div class="search-wrapper">
+    <span class="">Filtrer: </span>
+    <input type="text" (input)="searchEmployeByName($event)" placeholder="Rechercher un employé"/>
+  </div>
   <table class="table table-bordered w-100" style="font-size: 15px; table-layout: fixed;">
     <thead class="thead-light">
     <tr>
@@ -22,7 +26,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let employe of employePageReponse.content">
+    <tr *ngFor="let employe of filteredEmployeData">
       <th>{{ employe.idEmp }}</th>
       <td>{{ employe.nom }}</td>
       <td>{{ employe.prenom }}</td>

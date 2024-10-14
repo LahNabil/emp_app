@@ -14,6 +14,8 @@ export class EmployeListComponent implements OnInit{
   page: number = 0;
   size: number = 4;
   employePageReponse: PageResponseEmploye = {};
+  filteredEmployeData: any[] = [];
+  searchEmploye: string = '';
 
   constructor(private employeService: EmployeService, private router: Router) {
   }
@@ -26,7 +28,7 @@ export class EmployeListComponent implements OnInit{
       .subscribe({
         next: (employes)=>{
           this.employePageReponse = employes;
-          console.log(employes);
+          this.filteredEmployeData = employes.content ?? [];
         }
       })
 
@@ -69,6 +71,24 @@ export class EmployeListComponent implements OnInit{
 
   onEdit(idEmp: number | undefined) {
     this.router.navigate(['employe', 'manage', idEmp])
+
+  }
+
+  searchEmployeByName($event: any) {
+    const input = $event.target as HTMLInputElement;
+    const searchValue = input.value.toLowerCase();
+    console.log(searchValue);
+    if (this.employePageReponse.content) {
+      this.filteredEmployeData = this.employePageReponse.content.filter(employee =>
+        employee.nom.toLowerCase().includes(searchValue)
+      );
+    }
+    // this.filteredEmployeData = this.employePageReponse.content?.filter(employee=>{
+    //   if(employee.nom.toLowerCase().includes(input.value.toLowerCase())){
+    //     return employee
+    //
+    //   }
+    // })
 
   }
 }
