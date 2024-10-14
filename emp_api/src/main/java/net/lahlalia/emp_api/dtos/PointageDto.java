@@ -23,4 +23,5 @@ public class PointageDto {
     private LocalDateTime dateEntre;
     private LocalDateTime dateSortie;
     private Integer idEmp;
+    private String nomEmp;
 }

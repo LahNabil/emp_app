@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {PageResponseDepartement} from "../../../../models/PageResponseDepartement";
 import {PageResponseEmploye} from "../../../../models/PageResponseEmploye";
-import {EmployeService} from "../../service/employe.service";
+import {EmployeService} from "../../service/employe/employe.service";
 import {Router} from "@angular/router";
 
 @Component({

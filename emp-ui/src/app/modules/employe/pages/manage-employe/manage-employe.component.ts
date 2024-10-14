@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EmployeResponse} from "../../../../models/EmployeResponse";
 import {ActivatedRoute, Router} from "@angular/router";
-import {EmployeService} from "../../service/employe.service";
+import {EmployeService} from "../../service/employe/employe.service";
 import {EmpDto} from "../../../../models/EmpDto";
 import {SharedService} from "../../../shared-module/services/shared.service";
 
