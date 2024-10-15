@@ -11,10 +11,9 @@ import {Router} from "@angular/router";
 export class EmployeListComponent implements OnInit{
 
   page: number = 0;
-  size: number = 4;
+  size: number = 5;
   employePageReponse: PageResponseEmploye = {};
   filteredEmployeData: any[] = [];
-  searchEmploye: string = '';
 
   constructor(private employeService: EmployeService, private router: Router) {
   }

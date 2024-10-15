@@ -20,7 +20,7 @@ export class UserService {
   public updateUser(request: RegistrationRequest):Observable<RegistrationRequest>{
     return this._http.put<RegistrationRequest>(`${this.baseUrl}user/`, request);
   }
-  public changePassword(request: ChangePasswordRequest):Observable<any>{
-    return this._http.patch(`${this.baseUrl}user/`, request);
+  public changePassword(request: ChangePasswordRequest):Observable<void>{
+    return this._http.patch<void>(`${this.baseUrl}user/`, request);
   }
 }
