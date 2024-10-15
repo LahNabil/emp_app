@@ -12,6 +12,7 @@ export class PointageComponent implements OnInit{
   page: number = 0;
   size: number = 10;
   pointagePageReponse: PageResponsePointage = {};
+  filteredPointageData: any[] = [];
 
   constructor(private pointageService: PointageService, private router: Router) {
   }
@@ -24,10 +25,12 @@ export class PointageComponent implements OnInit{
       .subscribe({
         next: (pointages)=>{
           this.pointagePageReponse = pointages;
+          this.filteredPointageData = pointages.content ?? [];
         }
       })
 
   }
+
 
   goToFirstPage() {
     this.page = 0;
@@ -61,6 +64,17 @@ export class PointageComponent implements OnInit{
 
   isLastPage() {
     return this.page == this.pointagePageReponse.totalPages as number - 1;
+  }
+  searchEmployeByName($event: any) {
+    const input = $event.target as HTMLInputElement;
+    const searchValue = input.value.toLowerCase();
+    console.log(searchValue);
+    if (this.pointagePageReponse.content) {
+      this.filteredPointageData = this.pointagePageReponse.content.filter(pointage =>
+        pointage.nomEmp?.toLowerCase().includes(searchValue)
+      );
+    }
+
   }
 
 }

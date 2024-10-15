@@ -20,8 +20,11 @@ public class PointageDto {
 
 
     private Integer idPoi;
+    @NotNull(message = "Veuillez saisir la date d'entrée")
     private LocalDateTime dateEntre;
+    @NotNull(message = "Veuillez saisir la date de sortie")
     private LocalDateTime dateSortie;
+    @NotNull(message = "Veuillez saisir un Employé")
     private Integer idEmp;
     private String nomEmp;
 }

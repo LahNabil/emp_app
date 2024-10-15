@@ -30,7 +30,6 @@ export class EmployeListComponent implements OnInit{
           this.filteredEmployeData = employes.content ?? [];
         }
       })
-
   }
 
   goToFirstPage() {

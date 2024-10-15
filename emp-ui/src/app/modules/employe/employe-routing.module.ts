@@ -5,6 +5,7 @@ import {EmployeListComponent} from "./pages/employe-list/employe-list.component"
 import {ManageEmployeComponent} from "./pages/manage-employe/manage-employe.component";
 import {ManageDepartementsComponent} from "../departement/pages/manage-departements/manage-departements.component";
 import {PointageComponent} from "./pages/pointage-list/pointage.component";
+import {ManagePointageComponent} from "./pages/manage-pointage/manage-pointage.component";
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: 'pointage',
         component: PointageComponent
+      },
+      {
+        path: 'pointage/manage',
+        component: ManagePointageComponent
       },
       {
         path: 'manage',

@@ -8,6 +8,7 @@ import {SharedModuleModule} from "../shared-module/shared-module.module";
 import { ManageEmployeComponent } from './pages/manage-employe/manage-employe.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { PointageComponent } from './pages/pointage-list/pointage.component';
+import { ManagePointageComponent } from './pages/manage-pointage/manage-pointage.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { PointageComponent } from './pages/pointage-list/pointage.component';
     MainComponent,
     EmployeListComponent,
     ManageEmployeComponent,
-    PointageComponent
+    PointageComponent,
+    ManagePointageComponent
   ],
   imports: [
     CommonModule,

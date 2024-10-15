@@ -1,5 +1,6 @@
 package net.lahlalia.emp_api.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import net.lahlalia.emp_api.dtos.PageResponse;
 import net.lahlalia.emp_api.dtos.PointageDto;
@@ -31,7 +32,7 @@ public class PointageController {
         return ResponseEntity.ok(pointageService.getAllPointage(page,size));
     }
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PointageDto> savePointage(@RequestBody PointageDto dto){
+    public ResponseEntity<PointageDto> savePointage(@RequestBody @Valid PointageDto dto){
         PointageDto savedDto = pointageService.savePointage(dto);
         return new ResponseEntity<>(savedDto, HttpStatus.CREATED);
     }

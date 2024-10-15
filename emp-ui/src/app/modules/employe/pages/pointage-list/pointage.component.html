@@ -1,16 +1,16 @@
 <h3>Suivi des Heures de Travail et Pointage</h3>
 <hr>
 <div class="d-flex justify-content-end mb-3">
-  <a routerLink="/pointage/manage" class="btn btn-outline-primary">
+  <a routerLink="/employe/pointage/manage" class="btn btn-outline-primary">
     <i class="fas fa-plus"></i>&nbsp; Enregistrer une présence
   </a>
 </div>
 
 <div class="container-fluid">
-<!--  <div class="search-wrapper">-->
-<!--    <span class="">Filtrer: </span>-->
-<!--    <input type="text" (input)="searchEmployeByName($event)" placeholder="Rechercher un employé"/>-->
-<!--  </div>-->
+  <div class="search-wrapper">
+    <span class="">Filtrer: </span>
+    <input type="text" (input)="searchEmployeByName($event)" placeholder="Rechercher un employé"/>
+  </div>
   <table class="table table-bordered w-100" style="font-size: 15px; table-layout: fixed;">
     <thead class="thead-light">
     <tr>
@@ -22,10 +22,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let pointage of pointagePageReponse.content">
+    <tr *ngFor="let pointage of filteredPointageData">
       <th>{{ pointage.idPoi }}</th>
-      <td>{{ pointage.dateEntre }}</td>
-      <td>{{ pointage.dateSortie }}</td>
+      <td>{{ pointage.dateEntre | date:'yyyy-MM-dd HH:mm'  }}</td>
+      <td>{{ pointage.dateSortie | date:'yyyy-MM-dd HH:mm'  }}</td>
       <th>{{ pointage.idEmp }}</th>
       <td>{{ pointage.nomEmp }}</td>
     </tr>
