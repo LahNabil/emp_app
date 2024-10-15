@@ -10,7 +10,7 @@ import {PointageService} from "../../service/pointage/pointage.service";
 })
 export class PointageComponent implements OnInit{
   page: number = 0;
-  size: number = 10;
+  size: number = 7;
   pointagePageReponse: PageResponsePointage = {};
   filteredPointageData: any[] = [];
 

@@ -2,13 +2,14 @@ package net.lahlalia.emp_api.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import net.lahlalia.emp_api.dtos.ChangePasswordRequest;
 import net.lahlalia.emp_api.dtos.UserDto;
-import net.lahlalia.emp_api.services.AuthenticationService;
 import net.lahlalia.emp_api.services.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -37,6 +38,14 @@ public class UserController {
     public ResponseEntity<UserDto> updateUser(@RequestBody @Valid UserDto userDto) {
         UserDto updatedUser = userService.updateUser(userDto);
         return ResponseEntity.ok(updatedUser);
+    }
+    @PatchMapping("/")
+    public ResponseEntity<?> changePassword(
+            @RequestBody ChangePasswordRequest request,
+            Principal connectedUser
+    ) {
+        userService.changePassword(request, connectedUser);
+        return ResponseEntity.ok().build();
     }
 
 }

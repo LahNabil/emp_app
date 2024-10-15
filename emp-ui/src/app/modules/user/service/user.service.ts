@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment.development";
 import {Observable} from "rxjs";
 import {RegistrationRequest} from "../../../models/RegistrationRequest";
+import {ChangePasswordRequest} from "../../../models/ChangePasswordRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,8 @@ export class UserService {
 
   public updateUser(request: RegistrationRequest):Observable<RegistrationRequest>{
     return this._http.put<RegistrationRequest>(`${this.baseUrl}user/`, request);
+  }
+  public changePassword(request: ChangePasswordRequest):Observable<any>{
+    return this._http.patch(`${this.baseUrl}user/`, request);
   }
 }

@@ -32,4 +32,8 @@ export class UserDetailsComponent implements OnInit{
   updateUser() {
     this.router.navigate(['user','update'])
   }
+
+  ChangePassword() {
+    this.router.navigate(['user','changepassword'])
+  }
 }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {MainComponent} from "./pages/main/main.component";
 import {UserDetailsComponent} from "./pages/user-details/user-details.component";
 import {UpdateUserComponent} from "./pages/update-user/update-user.component";
+import {ChangePasswordComponent} from "./pages/change-password/change-password.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'update',
         component: UpdateUserComponent
+      },
+      {
+        path: 'changepassword',
+        component: ChangePasswordComponent
       }
     ]
   }
