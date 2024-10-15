@@ -1,5 +1,5 @@
 //.container {
-//  background-image: url('/assets/images/livraison_logo.jpg');
+//  background-image: url('/assets/images/reunion3.jpg');
 //  background-size: cover;
 //  background-position: center; /* Centers the image */
 //  background-repeat: no-repeat;
@@ -10,23 +10,40 @@
   display: block;
   height: 100vh;
   width: auto;
-  background-image: url("/assets/images/livraison_logo.jpg");
-  background-size: cover; /* Make sure the image covers the entire host area */
-  background-position: center; /* Centers the background image */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-image: url("/assets/images/bg_img.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-
+.bienvenu{
+  font-size: 90px;
+  font-weight: 700;
+}
+.container {
+  text-align: left;
+  padding: 20px;
+  //border: 1px solid black;
+  width: 40%;
+  height: 100%;
+  margin-left: 5%;
+  margin-top: 2%;
+  color: #000066;
+}
 .layout {
   display: flex;
-  min-height: 100vh; /* Full viewport height */
+  min-height: 100vh;
 }
-
-
-
-
-.bienvenu{
-  text-align: center;
+.message-bienvenue{
   color: darkblue;
-  font-weight: bold;
-  padding-top: 10%;
+
 }
+
+
+
+
+//.bienvenu{
+//  text-align: center;
+//  color: darkblue;
+//  font-weight: bold;
+//  padding-top: 10%;
+//}

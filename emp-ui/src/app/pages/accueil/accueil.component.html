@@ -1,10 +1,14 @@
 <app-header></app-header>
 <div class="layout">
-<app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
-<div class="container">
-  <span>
-    <h1 class="bienvenu">Bienvenu {{username}}</h1>
-  </span>
+  <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+  <div class="container">
+    <h1 class="bienvenu">Bienvenue, {{username}} !</h1>
+    <p class="message-bienvenue">
+      Merci de vous connecter.
+      <br>
+      Profitez de votre utilisation de l'application.
+      <br>
+      N'hésitez pas à nous solliciter pour toute question.
+    </p>
+  </div>
 </div>
-</div>
-
