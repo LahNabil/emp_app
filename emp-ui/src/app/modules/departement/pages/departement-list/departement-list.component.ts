@@ -72,4 +72,9 @@ export class DepartementListComponent implements OnInit{
     this.router.navigate(['departement', 'manage', dep.idDep])
 
   }
+
+  detailsDepartement(dep: DepartementResponse) {
+    this.router.navigate(['departement', 'emp', dep.idDep])
+
+  }
 }

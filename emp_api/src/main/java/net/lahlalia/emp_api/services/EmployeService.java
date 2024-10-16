@@ -115,6 +115,15 @@ public class EmployeService {
         employeRepository.deleteById(idEmp);
         return true;
     }
+    public List<EmployeDto> getEmployesByDepartement(Departement departement) {
+        List<Employe> employes = employeRepository.findByDepartement(departement);
+        return employes.stream().map(employe-> {
+            EmployeDto dto = mapperEmploye.toDto(employe);
+            dto.setIdDep(employe.getDepartement() != null ? employe.getDepartement().getIdDep() : null);
+            dto.setNomDep(employe.getDepartement()!= null ? employe.getDepartement().getNom() : null);
+            return dto;
+        }).toList();
+    }
 
 
 }

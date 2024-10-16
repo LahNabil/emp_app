@@ -1,0 +1,30 @@
+<h3>Liste des Employés par Departement</h3>
+<hr>
+<div class="container-fluid">
+  <table class="table table-bordered w-100" style="font-size: 15px; table-layout: fixed;">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Prenom</th>
+      <th scope="col">CIN</th>
+      <th scope="col">Telephone</th>
+      <th scope="col">Salaire de base</th>
+      <th scope="col">Superviseur</th>
+      <th scope="col">Departement</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let employe of empResponse">
+      <th>{{ employe.idEmp }}</th>
+      <td>{{ employe.nom }}</td>
+      <td>{{ employe.prenom }}</td>
+      <th>{{ employe.cin }}</th>
+      <td>{{ employe.telephone }}</td>
+      <td>{{ employe.salaireBase }} &nbsp; MAD</td>
+      <th>{{ employe.idSuperviseur }}</th>
+      <td>{{ employe.nomDep }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

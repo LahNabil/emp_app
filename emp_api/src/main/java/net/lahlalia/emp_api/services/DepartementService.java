@@ -3,6 +3,7 @@ package net.lahlalia.emp_api.services;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.lahlalia.emp_api.dtos.DepartementDto;
+import net.lahlalia.emp_api.dtos.EmployeDto;
 import net.lahlalia.emp_api.dtos.PageResponse;
 import net.lahlalia.emp_api.entities.Departement;
 import net.lahlalia.emp_api.exceptions.DepartementNotFoundException;
@@ -24,6 +25,7 @@ public class DepartementService {
 
     private final DepartementRepository departementRepository;
     private final MapperDepartement mapperDepartement;
+    private final EmployeService employeService;
 
     public PageResponse<DepartementDto> getAllDepartements(int page, int size){
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
@@ -42,6 +44,20 @@ public class DepartementService {
     public List<DepartementDto> getAllDeps(){
         return departementRepository.findAll().stream().map(mapperDepartement::toDto).toList();
 
+    }
+
+    public List<EmployeDto> getEmployesByDepartement(Integer idDep){
+        if(idDep == null){
+            log.error("id is null");
+            return null;
+        }
+        Optional<Departement> departementOptional = departementRepository.findById(idDep);
+        if (departementOptional.isEmpty()) {
+            log.error("Departement with id {} not found", idDep);
+            return null; // or throw a DepartementNotFoundException
+        }
+        Departement departement = departementOptional.get();
+        return employeService.getEmployesByDepartement(departement);
     }
     public DepartementDto getDepartementById(Integer idDep){
         if(idDep == null){

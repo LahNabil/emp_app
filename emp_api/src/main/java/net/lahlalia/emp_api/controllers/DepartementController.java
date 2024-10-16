@@ -5,6 +5,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import net.lahlalia.emp_api.dtos.DepartementDto;
+import net.lahlalia.emp_api.dtos.EmployeDto;
 import net.lahlalia.emp_api.dtos.PageResponse;
 import net.lahlalia.emp_api.exceptions.DepartementNotFoundException;
 import net.lahlalia.emp_api.services.DepartementService;
@@ -25,6 +26,11 @@ public class DepartementController {
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<DepartementDto>> getAllDeps(){
         List<DepartementDto> dtos = departementService.getAllDeps();
+        return ResponseEntity.ok(dtos);
+    }
+    @GetMapping(value = "/employes/{idDep}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<EmployeDto>> getEmployeByDep(@PathVariable Integer idDep){
+        List<EmployeDto> dtos = departementService.getEmployesByDepartement(idDep);
         return ResponseEntity.ok(dtos);
     }
 

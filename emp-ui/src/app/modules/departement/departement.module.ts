@@ -8,6 +8,7 @@ import { DepCardComponent } from './components/dep-card/dep-card.component';
 import {SharedModuleModule} from "../shared-module/shared-module.module";
 import { ManageDepartementsComponent } from './pages/manage-departements/manage-departements.component';
 import {FormsModule} from "@angular/forms";
+import { EmpDepListComponent } from './pages/emp-dep-list/emp-dep-list.component';
 
 
 
@@ -17,6 +18,7 @@ import {FormsModule} from "@angular/forms";
     DepartementListComponent,
     DepCardComponent,
     ManageDepartementsComponent,
+    EmpDepListComponent,
 
   ],
   imports: [

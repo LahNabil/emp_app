@@ -11,6 +11,7 @@ export class DepCardComponent {
   img: string = "https://cronuts.digital/wp-content/uploads/2023/12/6D03D.png"
 
   @Output() private edit: EventEmitter<DepartementResponse> = new EventEmitter<DepartementResponse>();
+  @Output() private details: EventEmitter<DepartementResponse> = new EventEmitter<DepartementResponse>();
 
   get dep(): DepartementResponse {
     return this._dep;
@@ -25,5 +26,9 @@ export class DepCardComponent {
   onEdit() {
     this.edit.emit(this._dep);
 
+  }
+
+  onDetails() {
+    this.details.emit(this._dep);
   }
 }

@@ -22,6 +22,9 @@ export class DepartementService {
   getDepartementById(idDep: number):Observable<DepartementResponse>{
     return this._http.get<DepartementResponse>(`${this.baseUrl}departement/${idDep}`);
   }
+  getEmployesByDepartement(idDep:number):Observable<any>{
+    return this._http.get(`${this.baseUrl}departement/employes/${idDep}`)
+  }
 
   saveDepartement(dep: DepartementResponse):Observable<Object>{
     return this._http.post(`${this.baseUrl}departement/`, dep);
