@@ -18,6 +18,9 @@ export class PointageService {
       .set('size', size.toString());
     return this._http.get<PageResponsePointage>(`${this.baseUrl}pointage/`, {params});
   }
+  getPointages():Observable<any>{
+    return this._http.get(`${this.baseUrl}pointage/all`);
+  }
   savePointage(poi: PointageResponse):Observable<PointageResponse>{
     return this._http.post<PointageResponse>(`${this.baseUrl}pointage/`, poi);
   }

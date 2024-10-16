@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {PageResponsePointage} from "../../../../models/PageResponsePointage";
-import {Router} from "@angular/router";
 import {PointageService} from "../../service/pointage/pointage.service";
 
 @Component({
@@ -10,14 +9,21 @@ import {PointageService} from "../../service/pointage/pointage.service";
 })
 export class PointageComponent implements OnInit{
   page: number = 0;
-  size: number = 7;
+  size: number = 5;
   pointagePageReponse: PageResponsePointage = {};
   filteredPointageData: any[] = [];
+  allPoi: any[] = [];
 
-  constructor(private pointageService: PointageService, private router: Router) {
+  constructor(private pointageService: PointageService) {
   }
   ngOnInit() {
     this.getAllPointages();
+    this.getAllPoi();
+  }
+  private getAllPoi(){
+    this.pointageService.getPointages().subscribe(data=>{
+      this.allPoi = data;
+    })
   }
 
   private getAllPointages() {
@@ -68,13 +74,11 @@ export class PointageComponent implements OnInit{
   searchEmployeByName($event: any) {
     const input = $event.target as HTMLInputElement;
     const searchValue = input.value.toLowerCase();
-    console.log(searchValue);
     if (this.pointagePageReponse.content) {
-      this.filteredPointageData = this.pointagePageReponse.content.filter(pointage =>
+      this.filteredPointageData = this.allPoi.filter(pointage =>
         pointage.nomEmp?.toLowerCase().includes(searchValue)
       );
     }
-
   }
 
 }
