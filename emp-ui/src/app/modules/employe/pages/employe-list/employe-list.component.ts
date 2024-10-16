@@ -14,11 +14,19 @@ export class EmployeListComponent implements OnInit{
   size: number = 5;
   employePageReponse: PageResponseEmploye = {};
   filteredEmployeData: any[] = [];
+  allEmp: any[] = [];
 
   constructor(private employeService: EmployeService, private router: Router) {
   }
   ngOnInit() {
     this.getAllEmployes();
+    this.getAllEmp();
+  }
+
+  private getAllEmp(){
+    this.employeService.getEmpAll().subscribe(data=>{
+      this.allEmp = data;
+    })
   }
 
   private getAllEmployes() {
@@ -74,9 +82,8 @@ export class EmployeListComponent implements OnInit{
   searchEmployeByName($event: any) {
     const input = $event.target as HTMLInputElement;
     const searchValue = input.value.toLowerCase();
-    console.log(searchValue);
     if (this.employePageReponse.content) {
-      this.filteredEmployeData = this.employePageReponse.content.filter(employee =>
+      this.filteredEmployeData = this.allEmp.filter(employee =>
         employee.nom.toLowerCase().includes(searchValue)
       );
     }
