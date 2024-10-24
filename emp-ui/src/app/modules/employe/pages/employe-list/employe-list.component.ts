@@ -95,4 +95,18 @@ export class EmployeListComponent implements OnInit{
     // })
 
   }
+
+  onArchive(idEmp: any) {
+      const isConfirmed = window.confirm("Êtes-vous sûr de vouloir supprimer cet Employé ?");
+      if (isConfirmed) {
+        this.employeService.archiveEmploye(idEmp).subscribe({
+          next: () => {
+            window.location.reload();
+          },
+          error: (err) => {
+            console.error('Error archiving department:', err);
+          }
+        });
+      }
+  }
 }

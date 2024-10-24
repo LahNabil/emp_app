@@ -23,6 +23,10 @@ export class EmployeService {
     return this._http.get<PageResponseEmploye>(`${this.baseUrl}employe/`, {params});
   }
 
+  archiveEmploye(idEmp: number | undefined):Observable<any>{
+    return this._http.patch(`${this.baseUrl}employe/${idEmp}`, {})
+  }
+
   getEmpAll():Observable<any>{
     return this._http.get(`${this.baseUrl}employe/all`);
   }

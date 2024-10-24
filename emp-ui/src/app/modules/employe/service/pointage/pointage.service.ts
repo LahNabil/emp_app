@@ -24,5 +24,8 @@ export class PointageService {
   savePointage(poi: PointageResponse):Observable<PointageResponse>{
     return this._http.post<PointageResponse>(`${this.baseUrl}pointage/`, poi);
   }
+  archivePointage(idPoi: number | undefined):Observable<any>{
+    return this._http.patch(`${this.baseUrl}pointage/${idPoi}`, {})
+  }
 
 }

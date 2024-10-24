@@ -81,4 +81,17 @@ export class PointageComponent implements OnInit{
     }
   }
 
+  onArchive(idPoi: any) {
+    const isConfirmed = window.confirm("Êtes-vous sûr de vouloir supprimer cette présence ?");
+    if (isConfirmed) {
+      this.pointageService.archivePointage(idPoi).subscribe({
+        next: () => {
+          window.location.reload();
+        },
+        error: (err) => {
+          console.error('Error archiving presence:', err);
+        }
+      });
+    }
+  }
 }

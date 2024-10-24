@@ -3,6 +3,7 @@ package net.lahlalia.emp_api.services;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.lahlalia.emp_api.dtos.DepartementDto;
 import net.lahlalia.emp_api.dtos.EmployeDto;
 import net.lahlalia.emp_api.dtos.PageResponse;
 import net.lahlalia.emp_api.entities.Departement;
@@ -30,9 +31,10 @@ public class EmployeService {
     public List<EmployeDto> getAllEmp(){
         return employeRepository.findAll().stream().map(mapperEmploye::toDto).toList();
     }
+
     public PageResponse<EmployeDto> getAllEmployes(int page, int size){
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
-        Page<Employe> employes = employeRepository.findAll(pageable);
+        Page<Employe> employes = employeRepository.findAllByArchivedFalse(pageable);
         List<EmployeDto> employeDtos = employes.stream()
                 .map(employe-> {
                     EmployeDto dto = mapperEmploye.toDto(employe);

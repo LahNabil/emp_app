@@ -27,7 +27,14 @@ public class UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication != null && authentication.getPrincipal() instanceof User){
             User user = (User) authentication.getPrincipal();
-            return mapperUser.toDto(user);
+            UserDto userDto = UserDto.builder()
+                            .name(user.getName())
+                            .phone(user.getPhone())
+                            .email(user.getEmail())
+                            .username(user.fullName())
+                        .build();
+
+            return userDto;
 
         }
 
@@ -60,9 +67,9 @@ public class UserService {
                     .orElseThrow(() -> new RuntimeException("User not found"));
 
             user.setName(updatedUserDto.getName());
-            user.setEmail(updatedUserDto.getUsername());
+            user.setEmail(updatedUserDto.getEmail());
             user.setPhone(updatedUserDto.getPhone());
-            user.setUsername(updatedUserDto.getEmail());
+            user.setUsername(updatedUserDto.getUsername());
 
             user = userRepository.save(user);
 
@@ -84,10 +91,8 @@ public class UserService {
             throw new IllegalStateException("Password are not the same");
         }
 
-        // update the password
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
 
-        // save the new password
         userRepository.save(user);
     }
 

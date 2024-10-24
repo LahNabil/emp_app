@@ -19,6 +19,7 @@
       <th scope="col">Date de sortie</th>
       <th scope="col">ID d'employé</th>
       <th scope="col">Nom d'employé</th>
+      <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -28,6 +29,7 @@
       <td>{{ pointage.dateSortie | date:'yyyy-MM-dd HH:mm'  }}</td>
       <th>{{ pointage.idEmp }}</th>
       <td>{{ pointage.nomEmp }}</td>
+      <td><i (click)="onArchive(pointage.idPoi)" class="fas fa-archive text-danger"></i></td>
     </tr>
     </tbody>
   </table>
