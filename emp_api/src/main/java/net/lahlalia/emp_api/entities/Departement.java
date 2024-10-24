@@ -1,8 +1,6 @@
 package net.lahlalia.emp_api.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -34,6 +32,9 @@ public class Departement {
     private LocalDateTime lastModifiedDate;
     @OneToMany
     private List<Employe> employes;
+
+    @Column(nullable = false)
+    private boolean archived = false;
 
 
 

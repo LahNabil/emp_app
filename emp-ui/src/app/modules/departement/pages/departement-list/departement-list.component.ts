@@ -28,7 +28,6 @@ export class DepartementListComponent implements OnInit{
       .subscribe({
         next: (departements)=>{
           this.departementResponse = departements;
-          console.log(departements);
         }
       })
 
@@ -77,4 +76,19 @@ export class DepartementListComponent implements OnInit{
     this.router.navigate(['departement', 'emp', dep.idDep])
 
   }
+
+  archiveDepartement(dep: DepartementResponse) {
+    const isConfirmed = window.confirm("Êtes-vous sûr de vouloir supprimer ce Departement ?");
+    if (isConfirmed) {
+      this.departementService.archiveDepartement(dep.idDep).subscribe({
+        next: () => {
+          window.location.reload();
+        },
+        error: (err) => {
+          console.error('Error archiving department:', err);
+        }
+      });
+    }
+  }
+
 }

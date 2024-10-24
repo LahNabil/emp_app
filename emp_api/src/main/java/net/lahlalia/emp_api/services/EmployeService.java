@@ -1,5 +1,6 @@
 package net.lahlalia.emp_api.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.lahlalia.emp_api.dtos.EmployeDto;
@@ -123,6 +124,15 @@ public class EmployeService {
             dto.setNomDep(employe.getDepartement()!= null ? employe.getDepartement().getNom() : null);
             return dto;
         }).toList();
+    }
+
+    public Integer updateArchivedStatus(Integer idEmp){
+        Employe emp = employeRepository.findById(idEmp).orElseThrow(
+                ()-> new EntityNotFoundException("No Employe found" + idEmp)
+        );
+        emp.setArchived(!emp.isArchived());
+        employeRepository.save(emp);
+        return idEmp;
     }
 
 

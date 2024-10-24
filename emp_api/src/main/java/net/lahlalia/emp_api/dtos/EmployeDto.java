@@ -45,4 +45,6 @@ public class EmployeDto {
 
     private String nomDep;
 
+    //private boolean archived;
+
 }

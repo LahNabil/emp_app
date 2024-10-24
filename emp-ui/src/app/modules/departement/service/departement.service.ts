@@ -26,6 +26,10 @@ export class DepartementService {
     return this._http.get(`${this.baseUrl}departement/employes/${idDep}`)
   }
 
+  archiveDepartement(idDep: number | undefined):Observable<any>{
+    return this._http.patch(`${this.baseUrl}departement/${idDep}`, {})
+  }
+
   saveDepartement(dep: DepartementResponse):Observable<Object>{
     return this._http.post(`${this.baseUrl}departement/`, dep);
   }

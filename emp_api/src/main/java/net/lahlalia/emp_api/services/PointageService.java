@@ -1,5 +1,6 @@
 package net.lahlalia.emp_api.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.lahlalia.emp_api.dtos.PageResponse;
@@ -57,6 +58,14 @@ public class PointageService {
                 pointages.isLast()
         );
     }
+    public Integer updateArchivedStatus(Integer idPoi){
+        Pointage poi = pointageRepository.findById(idPoi).orElseThrow(
+                ()-> new EntityNotFoundException("No Pointage found" + idPoi)
+        );
+        poi.setArchived(!poi.isArchived());
+        pointageRepository.save(poi);
+        return idPoi;
+    }
     public PointageDto savePointage(PointageDto dto){
         if (dto == null) {
             log.error("Pointage null");
@@ -69,5 +78,32 @@ public class PointageService {
         Pointage savedPointage = pointageRepository.save(pointage);
         return mapperPointage.toDto(savedPointage);
     }
+    /*
+    public PointageDto savePointage(PointageDto dto) {
+        if (dto == null) {
+            log.error("Pointage null");
+            return null;
+        }
+        Pointage pointage = mapperPointage.toEntity(dto);
+        if (dto.getIdEmp() != null) {
+            employeRepository.findById(dto.getIdEmp()).ifPresent(pointage::setEmploye);
+        }
+
+        // Extraire la date sans l'heure pour comparer uniquement la journée
+        LocalDateTime debutDeJournee = pointage.getDateEntre().toLocalDate().atStartOfDay();
+        LocalDateTime finDeJournee = pointage.getDateEntre().toLocalDate().atTime(23, 59, 59);
+
+        // Vérifier si un pointage existe déjà pour cet employé le même jour
+        boolean existeDeja = pointageRepository.existsByEmployeAndDateEntreBetween(pointage.getEmploye(), debutDeJournee, finDeJournee);
+
+        if (existeDeja) {
+            throw new IllegalArgumentException("Un pointage pour cet employé existe déjà pour cette journée.");
+        }
+
+        // Sauvegarder le pointage si la vérification passe
+        Pointage savedPointage = pointageRepository.save(pointage);
+        return mapperPointage.toDto(savedPointage);
+    }
+     */
 
 }

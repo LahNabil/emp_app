@@ -36,4 +36,9 @@ public class PointageController {
         PointageDto savedDto = pointageService.savePointage(dto);
         return new ResponseEntity<>(savedDto, HttpStatus.CREATED);
     }
+
+    @PatchMapping(value ="/{idPoi}" , produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Integer> updateArchiveStatus(@PathVariable Integer idPoi){
+        return ResponseEntity.ok(pointageService.updateArchivedStatus(idPoi));
+    }
 }

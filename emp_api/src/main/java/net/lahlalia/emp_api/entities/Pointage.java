@@ -39,4 +39,7 @@ public class Pointage {
     @LastModifiedDate
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
+
+    @Column(nullable = false)
+    private boolean archived = false;
 }

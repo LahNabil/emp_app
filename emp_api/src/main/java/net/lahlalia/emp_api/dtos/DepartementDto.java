@@ -15,4 +15,6 @@ public class DepartementDto {
     @NotEmpty(message = "Nom ne doit pas etre vide")
     @NotNull(message = "La valeur de ce champ est requise")
     private String nom;
+
+    //private boolean archived;
 }

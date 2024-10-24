@@ -65,5 +65,10 @@ public class EmployeController {
         return ResponseEntity.ok(updatedEmp);
     }
 
+    @PatchMapping(value ="/{idEmp}" , produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Integer> updateArchiveStatus(@PathVariable Integer idEmp){
+        return ResponseEntity.ok(employeService.updateArchivedStatus(idEmp));
+    }
+
 
 }

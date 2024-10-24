@@ -1,5 +1,6 @@
 package net.lahlalia.emp_api.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.lahlalia.emp_api.dtos.DepartementDto;
@@ -27,10 +28,14 @@ public class DepartementService {
     private final MapperDepartement mapperDepartement;
     private final EmployeService employeService;
 
-    public PageResponse<DepartementDto> getAllDepartements(int page, int size){
+    public PageResponse<DepartementDto> getAllDepartements(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
-        Page<Departement> departements = departementRepository.findAll(pageable);
-        List<DepartementDto> departementDtos = departements.stream().map(mapperDepartement::toDto).toList();
+        Page<Departement> departements = departementRepository.findAllByArchivedFalse(pageable); // Utiliser un méthode de repository spécifique
+
+        List<DepartementDto> departementDtos = departements.getContent().stream()
+                .map(mapperDepartement::toDto)
+                .toList();
+
         return new PageResponse<>(
                 departementDtos,
                 departements.getNumber(),
@@ -40,7 +45,8 @@ public class DepartementService {
                 departements.isFirst(),
                 departements.isLast()
         );
-   }
+    }
+
     public List<DepartementDto> getAllDeps(){
         return departementRepository.findAll().stream().map(mapperDepartement::toDto).toList();
 
@@ -88,7 +94,16 @@ public class DepartementService {
 
 
     }
+    public Integer updateArchivedStatus(Integer idDep){
+        Departement dep = departementRepository.findById(idDep).orElseThrow(
+                ()-> new EntityNotFoundException("No Departement found" + idDep)
+        );
+        dep.setArchived(!dep.isArchived());
+        departementRepository.save(dep);
+        return idDep;
+    }
 
+    /*
     public Boolean deleteDepartement(Integer idDep) throws DepartementNotFoundException {
         Optional<Departement> departement = departementRepository.findById(idDep);
         if(departement.isEmpty()) {
@@ -97,6 +112,7 @@ public class DepartementService {
         departementRepository.deleteById(idDep);
         return true;
     }
+     */
 
 
 }

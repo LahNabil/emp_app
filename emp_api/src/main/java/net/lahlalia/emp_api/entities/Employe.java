@@ -36,6 +36,8 @@ public class Employe {
     private String telephone;
     private double salaireBase;
 
+    //private boolean archived;
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdDate;
@@ -57,4 +59,7 @@ public class Employe {
     @ManyToOne
     @JoinColumn(name = "idDep")
     private Departement departement;
+
+    @Column(nullable = false)
+    private boolean archived = false;
 }

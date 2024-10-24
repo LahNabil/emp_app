@@ -12,7 +12,7 @@ export class DepCardComponent {
 
   @Output() private edit: EventEmitter<DepartementResponse> = new EventEmitter<DepartementResponse>();
   @Output() private details: EventEmitter<DepartementResponse> = new EventEmitter<DepartementResponse>();
-
+  @Output() private archive: EventEmitter<DepartementResponse> = new EventEmitter<DepartementResponse>();
   get dep(): DepartementResponse {
     return this._dep;
   }
@@ -26,6 +26,9 @@ export class DepCardComponent {
   onEdit() {
     this.edit.emit(this._dep);
 
+  }
+  onArchive(){
+    this.archive.emit(this._dep);
   }
 
   onDetails() {

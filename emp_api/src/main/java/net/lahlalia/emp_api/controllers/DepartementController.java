@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import net.lahlalia.emp_api.dtos.DepartementDto;
 import net.lahlalia.emp_api.dtos.EmployeDto;
 import net.lahlalia.emp_api.dtos.PageResponse;
-import net.lahlalia.emp_api.exceptions.DepartementNotFoundException;
 import net.lahlalia.emp_api.services.DepartementService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -57,7 +56,12 @@ public class DepartementController {
         DepartementDto updatedDep = departementService.updateDepartement(id,dto);
         return ResponseEntity.ok(updatedDep);
     }
+    @PatchMapping(value ="/{idDep}" , produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Integer> updateArchiveStatus(@PathVariable Integer idDep){
+        return ResponseEntity.ok(departementService.updateArchivedStatus(idDep));
+    }
 
+    /*
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteDepartement(@PathVariable Integer id) {
         try {
@@ -71,6 +75,8 @@ public class DepartementController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);  // Return 404 if the department is not found
         }
     }
+    */
+
 
 
 
