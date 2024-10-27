@@ -27,6 +27,12 @@
         <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Pointage</span>
       </a>
     </li>
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" [routerLink]="['/chat']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon fa-brands fa-rocketchat"></i>
+        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Chat</span>
+      </a>
+    </li>
 
 
   </ul>

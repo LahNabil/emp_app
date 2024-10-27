@@ -1,0 +1,15 @@
+<!-- chat.component.html -->
+<div class="chat-container">
+  <div class="chat-box">
+      <p>{{ message.text }}</p>
+  </div>
+  <div class="input-container">
+    <input
+      type="text"
+      [(ngModel)]="question"
+      (keydown.enter)="sendQuestion()"
+      placeholder="Ask something..."
+    />
+    <button (click)="sendQuestion()">Send</button>
+  </div>
+</div>

@@ -11,6 +11,10 @@ export const navbarData = [
     icon: 'fal fa-clipboard-list',
     label:'Pointage'},
 
+  {routeLink:'chat',
+    icon: 'fal fa-clipboard-list',
+    label:'Chat'},
+
 
 
 
