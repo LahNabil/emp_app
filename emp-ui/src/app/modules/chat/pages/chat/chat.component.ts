@@ -1,36 +1,33 @@
 import { Component } from '@angular/core';
-import {ChatService} from "../../services/chat.service";
-interface Message {
-  text: string;
-}
+import { ChatService } from '../../services/chat.service';
+import { QuestionResponse } from '../../../../models/QuestionResponse';
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrl: './chat.component.scss'
+  styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent {
-
-
   question: string = '';
-  messages: Message[] = [];
+  response: string = ''; // This will store the actual response text
+  isLoading: boolean = false;
 
-  constructor(private chatService: ChatService) {
-  }
-  sendQuestion(): void {
-    this.messages.push({ text: this.question});
+  constructor(private chatService: ChatService) {}
 
-    // Call the chat service to get the response
-    this.chatService.chat(this.question).subscribe(
-      (response) => {
-        console.log(response);
-        this.messages.push({ text: response });
-      },
-      (error) => {
-        this.messages.push({ text: 'There was an error. Please try again.'});
-      }
-    );
-
-    // Clear the input
-    this.question = '';
+  askQuestion() {
+    if (this.question.trim()) {
+      this.isLoading = true;
+      this.chatService.chat(this.question).subscribe({
+        next: (res: QuestionResponse) => {
+          this.response = res.response ?? 'No response received.'; // Handles undefined response
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error('Error:', err);
+          this.response = 'An error occurred. Please try again.';
+          this.isLoading = false;
+        }
+      });
+    }
   }
 }

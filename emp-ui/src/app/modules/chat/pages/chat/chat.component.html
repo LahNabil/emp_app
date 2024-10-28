@@ -1,15 +1,27 @@
-<!-- chat.component.html -->
 <div class="chat-container">
-  <div class="chat-box">
-      <p>{{ message.text }}</p>
-  </div>
-  <div class="input-container">
+  <h2>Chat</h2>
+
+  <!-- Input Form for the Question -->
+  <form (ngSubmit)="askQuestion()">
+    <label for="question">Your Question:</label>
     <input
       type="text"
+      id="question"
       [(ngModel)]="question"
-      (keydown.enter)="sendQuestion()"
-      placeholder="Ask something..."
+      name="question"
+      placeholder="Type your question here..."
+      required
     />
-    <button (click)="sendQuestion()">Send</button>
+    <button type="submit" [disabled]="isLoading || !question.trim()">Ask</button>
+  </form>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="loading">
+    Loading, please wait...
+  </div>
+
+  <!-- Display Response -->
+  <div *ngIf="!isLoading && response" class="response">
+    <strong>Response:</strong> {{ response }}
   </div>
 </div>
