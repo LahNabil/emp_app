@@ -1,6 +1,19 @@
+.page-container {
+  display: block;
+  height: 100vh;
+  width: auto;
+  background-image: url("/assets/images/bg_imgg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid black;
+}
 .login-container {
   width: 800px !important;
-  margin-top: 8%;
+  margin-left: 20%;
+  margin-top: 10%;
+  background-image: url("/assets/images/bg_imgg.jpg");
+  font-weight: bold;
 }
 
 .cursor-pointer {

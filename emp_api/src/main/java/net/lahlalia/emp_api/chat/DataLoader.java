@@ -14,19 +14,20 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 @Component
 public class DataLoader {
 
-    @Value("classpath:/pdfs/cv.pdf")
-    private Resource pdfFile;
+    @Value("classpath:/pdfs/*")
+    private Resource[] pdfFiles;
 
     @Value("lahl-vs1.json")
     private String vectorStoreName;
 
-    @Bean
+    //@Bean
     public SimpleVectorStore simpleVectorStore(EmbeddingModel embeddingModel){
         SimpleVectorStore simpleVectorStore = new SimpleVectorStore(embeddingModel);
         String path = Path.of("emp_api","src","main","resources","vectorstore").toFile().getAbsolutePath()+"/"+vectorStoreName;
@@ -35,14 +36,31 @@ public class DataLoader {
             log.info("VectoreStore exist");
             simpleVectorStore.load(fileStore);
         }else{
-            PagePdfDocumentReader documentReader = new PagePdfDocumentReader(pdfFile);
-            List<Document> documents = documentReader.get();
+            List<Document> allDocuments = new ArrayList<>();
+            for (Resource pdfFile : pdfFiles) {
+                try {
+                    PagePdfDocumentReader documentReader = new PagePdfDocumentReader(pdfFile);
+                    allDocuments.addAll(documentReader.get());
+                } catch (Exception e) {
+                    log.error("Error reading PDF file: " + pdfFile.getFilename(), e);
+                }
+            }
+
             TextSplitter textSplitter = new TokenTextSplitter();
-            List<Document> chunks = textSplitter.split(documents);
+            List<Document> chunks = textSplitter.split(allDocuments);
             simpleVectorStore.add(chunks);
             simpleVectorStore.save(fileStore);
+
+//            PagePdfDocumentReader documentReader = new PagePdfDocumentReader(pdfFile);
+//            List<Document> documents = documentReader.get();
+//            TextSplitter textSplitter = new TokenTextSplitter();
+//            List<Document> chunks = textSplitter.split(documents);
+//            simpleVectorStore.add(chunks);
+//            simpleVectorStore.save(fileStore);
         }
         return simpleVectorStore;
     }
+
+    public void initStore(){};
 
 }
