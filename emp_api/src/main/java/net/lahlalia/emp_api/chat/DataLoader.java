@@ -1,5 +1,6 @@
 package net.lahlalia.emp_api.chat;
 
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.embedding.EmbeddingModel;
@@ -7,9 +8,11 @@ import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.transformer.splitter.TextSplitter;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
+import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -26,6 +29,14 @@ public class DataLoader {
 
     @Value("lahl-vs1.json")
     private String vectorStoreName;
+
+    private JdbcClient jdbcClient;
+    private VectorStore vectorStore;
+
+    public DataLoader(JdbcClient jdbcClient, VectorStore vectorStore) {
+        this.jdbcClient = jdbcClient;
+        this.vectorStore = vectorStore;
+    }
 
     //@Bean
     public SimpleVectorStore simpleVectorStore(EmbeddingModel embeddingModel){
@@ -61,6 +72,26 @@ public class DataLoader {
         return simpleVectorStore;
     }
 
-    public void initStore(){};
+    @PostConstruct
+    public void initStore(){
+        Integer count = jdbcClient.sql("select count(*) from vector_store")
+                .query(Integer.class).single();
+        if(count==0){
+            List<Document> allDocuments = new ArrayList<>();
+            for (Resource pdfFile : pdfFiles) {
+                try {
+                    PagePdfDocumentReader documentReader = new PagePdfDocumentReader(pdfFile);
+                    allDocuments.addAll(documentReader.get());
+                } catch (Exception e) {
+                    log.error("Error reading PDF file: " + pdfFile.getFilename(), e);
+                }
+            }
+
+            TextSplitter textSplitter = new TokenTextSplitter();
+            List<Document> chunks = textSplitter.split(allDocuments);
+            vectorStore.add(chunks);
+            //simpleVectorStore.save(fileStore);
+        }
+    };
 
 }
