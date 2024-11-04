@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -20,18 +22,26 @@ public class FileService {
         this.dataLoader = dataLoader;
     }
 
-    public String store(MultipartFile file) throws IOException {
+    public List<String> store(List<MultipartFile> files) throws IOException {
         Path path = Paths.get("emp_api","src","main","resources","pdfs");
         if (!Files.exists(path)) {
             throw new RuntimeException("Le dossier de destination n'existe pas : " + path.toAbsolutePath());
         }
-        String fileId = UUID.randomUUID().toString();
-        Path filePath = Paths.get("emp_api","src","main","resources","pdfs",fileId+".pdf");
-        Files.copy(file.getInputStream(), filePath);
+        List<String> fileIds = new ArrayList<>();
+        for (MultipartFile file : files) {
+            String fileId = UUID.randomUUID().toString();
+            Path filePath = Paths.get("emp_api", "src", "main", "resources", "pdfs", fileId + ".pdf");
+            Files.copy(file.getInputStream(), filePath);
+            fileIds.add(fileId);
+        }
+
+
+//        Path filePath = Paths.get("emp_api","src","main","resources","pdfs",fileId+".pdf");
+//        Files.copy(file.getInputStream(), filePath);
 
         dataLoader.initStore();
 
-        return fileId;
+        return fileIds;
     }
 
 //
