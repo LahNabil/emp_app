@@ -38,40 +38,6 @@ public class DataLoader {
         this.vectorStore = vectorStore;
     }
 
-    //@Bean
-    public SimpleVectorStore simpleVectorStore(EmbeddingModel embeddingModel){
-        SimpleVectorStore simpleVectorStore = new SimpleVectorStore(embeddingModel);
-        String path = Path.of("emp_api","src","main","resources","vectorstore").toFile().getAbsolutePath()+"/"+vectorStoreName;
-        File fileStore = new File(path);
-        if(fileStore.exists()){
-            log.info("VectoreStore exist");
-            simpleVectorStore.load(fileStore);
-        }else{
-            List<Document> allDocuments = new ArrayList<>();
-            for (Resource pdfFile : pdfFiles) {
-                try {
-                    PagePdfDocumentReader documentReader = new PagePdfDocumentReader(pdfFile);
-                    allDocuments.addAll(documentReader.get());
-                } catch (Exception e) {
-                    log.error("Error reading PDF file: " + pdfFile.getFilename(), e);
-                }
-            }
-
-            TextSplitter textSplitter = new TokenTextSplitter();
-            List<Document> chunks = textSplitter.split(allDocuments);
-            simpleVectorStore.add(chunks);
-            simpleVectorStore.save(fileStore);
-
-//            PagePdfDocumentReader documentReader = new PagePdfDocumentReader(pdfFile);
-//            List<Document> documents = documentReader.get();
-//            TextSplitter textSplitter = new TokenTextSplitter();
-//            List<Document> chunks = textSplitter.split(documents);
-//            simpleVectorStore.add(chunks);
-//            simpleVectorStore.save(fileStore);
-        }
-        return simpleVectorStore;
-    }
-
     @PostConstruct
     public void initStore(){
         Integer count = jdbcClient.sql("select count(*) from vector_store")
@@ -93,5 +59,38 @@ public class DataLoader {
             //simpleVectorStore.save(fileStore);
         }
     };
+    //@Bean
+//    public SimpleVectorStore simpleVectorStore(EmbeddingModel embeddingModel){
+//        SimpleVectorStore simpleVectorStore = new SimpleVectorStore(embeddingModel);
+//        String path = Path.of("emp_api","src","main","resources","vectorstore").toFile().getAbsolutePath()+"/"+vectorStoreName;
+//        File fileStore = new File(path);
+//        if(fileStore.exists()){
+//            log.info("VectoreStore exist");
+//            simpleVectorStore.load(fileStore);
+//        }else{
+//            List<Document> allDocuments = new ArrayList<>();
+//            for (Resource pdfFile : pdfFiles) {
+//                try {
+//                    PagePdfDocumentReader documentReader = new PagePdfDocumentReader(pdfFile);
+//                    allDocuments.addAll(documentReader.get());
+//                } catch (Exception e) {
+//                    log.error("Error reading PDF file: " + pdfFile.getFilename(), e);
+//                }
+//            }
+//
+//            TextSplitter textSplitter = new TokenTextSplitter();
+//            List<Document> chunks = textSplitter.split(allDocuments);
+//            simpleVectorStore.add(chunks);
+//            simpleVectorStore.save(fileStore);
+//
+////            PagePdfDocumentReader documentReader = new PagePdfDocumentReader(pdfFile);
+////            List<Document> documents = documentReader.get();
+////            TextSplitter textSplitter = new TokenTextSplitter();
+////            List<Document> chunks = textSplitter.split(documents);
+////            simpleVectorStore.add(chunks);
+////            simpleVectorStore.save(fileStore);
+//        }
+//        return simpleVectorStore;
+//    }
 
 }

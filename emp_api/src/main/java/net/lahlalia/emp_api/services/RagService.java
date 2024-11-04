@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -38,4 +40,10 @@ public class RagService {
         Prompt prompt = promptTemplate.create(Map.of("context", context,"question",question));
         return chatClient.prompt(prompt).call().content();
     }
+
+//    public void addPdfFile(MultipartFile file) throws IOException{
+//        try (var inputStream = file.getInputStream()) {
+//            PagePdfDocumentReader documentReader = new PagePdfDocumentReader(inputStream);
+//            List<Document> documents = documentReader.get();
+//    }
 }
