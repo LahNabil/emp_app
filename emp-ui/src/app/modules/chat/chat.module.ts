@@ -6,12 +6,14 @@ import {SharedModuleModule} from "../shared-module/shared-module.module";
 import { MainComponent } from './pages/main/main.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import {FormsModule} from "@angular/forms";
+import { FileComponent } from './pages/file/file.component';
 
 
 @NgModule({
   declarations: [
     MainComponent,
-    ChatComponent
+    ChatComponent,
+    FileComponent
   ],
   imports: [
     CommonModule,

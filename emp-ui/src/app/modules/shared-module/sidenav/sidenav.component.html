@@ -33,6 +33,12 @@
         <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Chat</span>
       </a>
     </li>
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" [routerLink]="['/chat/file']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon fa-regular fa-file"></i>
+        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">CVs</span>
+      </a>
+    </li>
 
 
   </ul>

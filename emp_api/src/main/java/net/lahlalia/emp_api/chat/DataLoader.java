@@ -11,6 +11,7 @@ import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Component;
@@ -37,6 +38,23 @@ public class DataLoader {
         this.jdbcClient = jdbcClient;
         this.vectorStore = vectorStore;
     }
+    public void addFilesToVectorStore(List<Path> newFiles) {
+        List<Document> newDocuments = new ArrayList<>();
+        for (Path pdfFilePath : newFiles) {
+            try {
+                Resource pdfFile = new FileSystemResource(pdfFilePath.toFile());
+                PagePdfDocumentReader documentReader = new PagePdfDocumentReader(pdfFile);
+                newDocuments.addAll(documentReader.get());
+            } catch (Exception e) {
+                log.error("Error reading PDF file: " + pdfFilePath.getFileName(), e);
+            }
+        }
+
+        TextSplitter textSplitter = new TokenTextSplitter();
+        List<Document> chunks = textSplitter.split(newDocuments);
+        vectorStore.add(chunks);  // Ajoute uniquement les nouveaux fichiers
+    }
+
 
     @PostConstruct
     public void initStore(){
@@ -58,7 +76,8 @@ public class DataLoader {
             vectorStore.add(chunks);
             //simpleVectorStore.save(fileStore);
         }
-    };
+    }
+
     //@Bean
     public SimpleVectorStore simpleVectorStore(EmbeddingModel embeddingModel){
         SimpleVectorStore simpleVectorStore = new SimpleVectorStore(embeddingModel);

@@ -13,7 +13,13 @@ export const navbarData = [
 
   {routeLink:'chat',
     icon: 'fal fa-clipboard-list',
-    label:'Chat'},
+    label:'Chat'
+  },
+  {routeLink:'file',
+    icon: 'fa-regular fa-file',
+    label:'File'
+  },
+  
 
 
 
