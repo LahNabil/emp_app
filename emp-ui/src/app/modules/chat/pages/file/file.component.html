@@ -4,8 +4,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4>Upload and Download Files</h4>
-    </div>
-    <br>
+    </div><br>
     <div class="panel-body">
       <strong>Select files from your computer</strong>
       <div *ngIf="fileStatus.status==='progress'">
@@ -15,15 +14,23 @@
           </div>
         </div>
       </div> <hr>
+
       <form enctype="multipart/form-data">
         <fieldset>
           <div class="form-group">
             <div>
-              <input type="file" (change)="onUploadFiles($event.target.files)" name="files" multiple class="form-control" />
+              <input
+                type="file"
+                (change)="onFileSelected($event)"
+                name="files"
+                multiple class="form-control"
+              />
             </div>
           </div>
         </fieldset>
       </form>
+
+      <br>
     </div>
   </div>
 <div class="d-flex justify-content-end mb-3">

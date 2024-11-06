@@ -31,21 +31,43 @@ export class FileComponent implements OnInit{
       }
       )
   }
-  onUploadFiles(files: File[]):void{
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      const files = Array.from(input.files); // Convert FileList to an array of File
+      this.onUploadFiles(files);
+    }
+  }
+  onUploadFiles(files: File[]): void {
     const formData = new FormData();
-    for(const file of files){
-      formData.append('files', file, file.name);}
+    for (const file of files) {
+      formData.append('files', file, file.name);
+    }
     this.fileService.saveFiles(formData).subscribe(
-      event =>{
+      event => {
         console.log(event);
         this.resportProgress(event);
       },
-      (error: HttpErrorResponse)=> {
+      (error: HttpErrorResponse) => {
         console.log(error);
       }
     );
-
   }
+  // onUploadFiles(files: File[]):void{
+  //   const formData = new FormData();
+  //   for(const file of files){
+  //     formData.append('files', file, file.name);}
+  //   this.fileService.saveFiles(formData).subscribe(
+  //     event =>{
+  //       console.log(event);
+  //       this.resportProgress(event);
+  //     },
+  //     (error: HttpErrorResponse)=> {
+  //       console.log(error);
+  //     }
+  //   );
+  //
+  // }
 
   onDelete(name:String) {
 
