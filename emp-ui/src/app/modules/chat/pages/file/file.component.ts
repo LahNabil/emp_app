@@ -69,8 +69,20 @@ export class FileComponent implements OnInit{
   //
   // }
 
-  onDelete(name:String) {
-
+  onDelete(fileName: string) {
+    const isConfirmed = window.confirm("Êtes-vous sûr de vouloir supprimer ce Departement ?");
+    if (isConfirmed) {
+      this.fileService.deleteFile(fileName).subscribe(
+        (response) => {
+          console.log('Success:', response);
+          // Handle success message, maybe show a notification
+        },
+        (error) => {
+          console.error('Error:', error);
+          // Handle error, maybe show an error message
+        }
+      );
+    }
   }
   private updateStatus(loaded: number, total: number, requestType: string): void {
     this.fileStatus.status = 'progress';

@@ -83,6 +83,7 @@ public class FileService {
 
     public boolean deleteFile(String fileName) throws IOException {
         Path filePath = Paths.get("emp_api", "src", "main", "resources", "pdfs", fileName);
+        boolean fileDeleted = false;
         if (Files.exists(filePath)) {
             return Files.deleteIfExists(filePath);
         } else {

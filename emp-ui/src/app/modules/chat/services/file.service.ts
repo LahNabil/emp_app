@@ -19,6 +19,10 @@ export class FileService {
     return this._http.get<FileDto>(`${this.baseUrl}file/`);
   }
 
+  deleteFile(fileName: string): Observable<string> {
+    return this._http.delete<string>(`${this.baseUrl}file/${fileName}`);
+  }
+
   saveFiles(formData: FormData): Observable<HttpEvent<string[]>> {
     return this._http.post<string[]>(`${this.baseUrl}file/`, formData, {
       reportProgress: true,

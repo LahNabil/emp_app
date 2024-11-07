@@ -1,11 +1,17 @@
 .chat-container {
-  width: 1000px;
-
-  padding-left: 150px;
+  width: 1200px;
+  //padding-left: 100px;
   text-align: center;
   margin-top: 5%;
+  //border: 1px solid black;
+}
 
-
+.chat-messages {
+  max-height: 300px; /* Set the desired height for the scrollable area */
+  overflow-y: auto; /* Enables a vertical scroll bar */
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
 }
 
 .input-group {

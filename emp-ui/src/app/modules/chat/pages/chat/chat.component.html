@@ -1,26 +1,27 @@
 <div class="chat-container">
-  <h2>Comment puis-je vous aider ?</h2>
+  <h2>Trouvons ensemble le profil parfait !</h2>
 
-  <!-- Chat Display -->
+  <!-- Chat Display with Input Inside Scrollable Container -->
   <div class="chat-messages">
+    <!-- Messages -->
     <div *ngFor="let message of messages" [ngClass]="{ 'user-message': message.isUser, 'bot-message': !message.isUser }">
-      <strong *ngIf="message.isUser">You:</strong>
-      <strong *ngIf="!message.isUser">Chatbot:</strong>
+      <strong *ngIf="message.isUser">Vous:</strong>
+      <strong *ngIf="!message.isUser">Assistant:</strong>
       <p>{{ message.text }}</p>
     </div>
-    <div *ngIf="isLoading" class="loading">Loading, please wait...</div>
-  </div>
+    <div *ngIf="isLoading" class="loading">Chargement en cours...</div>
 
-  <!-- Input Form for the Question -->
-  <form (ngSubmit)="askQuestion()" class="input-form">
-    <input
-      class="text-area"
-      type="text"
-      [(ngModel)]="question"
-      name="question"
-      placeholder="Type your question here..."
-      required
-    />
-    <button type="submit" [disabled]="isLoading || !question.trim()">Send</button>
-  </form>
+    <!-- Input Form for the Question -->
+    <form (ngSubmit)="askQuestion()" class="input-form">
+      <input
+        class="text-area"
+        type="text"
+        [(ngModel)]="question"
+        name="question"
+        placeholder="Tapez votre question ici..."
+        required
+      />
+      <button type="submit" [disabled]="isLoading || !question.trim()">Envoyer</button>
+    </form>
+  </div>
 </div>
