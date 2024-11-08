@@ -27,5 +27,8 @@ export class PointageService {
   archivePointage(idPoi: number | undefined):Observable<any>{
     return this._http.patch(`${this.baseUrl}pointage/${idPoi}`, {})
   }
+  deletePointage(idPoi: number):Observable<any>{
+    return this._http.delete(`${this.baseUrl}pointage/${idPoi}`);
+  }
 
 }

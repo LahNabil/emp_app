@@ -58,6 +58,14 @@ public class PointageService {
                 pointages.isLast()
         );
     }
+    public Boolean deletePointage(Integer idPoi){
+        Pointage pointage = pointageRepository.findById(idPoi).orElseThrow(
+                ()-> new EntityNotFoundException("No Pointage found" + idPoi)
+        );
+        pointageRepository.delete(pointage);
+        return true;
+    }
+
     public Integer updateArchivedStatus(Integer idPoi){
         Pointage poi = pointageRepository.findById(idPoi).orElseThrow(
                 ()-> new EntityNotFoundException("No Pointage found" + idPoi)

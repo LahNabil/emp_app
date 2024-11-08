@@ -1,4 +1,4 @@
-.page-container {
+:host {
   display: block;
   height: 100vh;
   width: auto;
@@ -6,7 +6,17 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border: 1px solid black;
+  border: 0.5px solid aliceblue;
+}
+.page-container {
+  //display: block;
+  //height: 100vh;
+  //width: auto;
+  //background-image: url("/assets/images/bg_imgg.jpg");
+  //background-size: cover;
+  //background-position: center;
+  //background-repeat: no-repeat;
+  //border: 1px solid black;
 }
 .login-container {
   width: 800px !important;
