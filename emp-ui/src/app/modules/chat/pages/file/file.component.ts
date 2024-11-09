@@ -45,8 +45,11 @@ export class FileComponent implements OnInit{
     }
     this.fileService.saveFiles(formData).subscribe(
       event => {
-        console.log(event);
+
         this.resportProgress(event);
+        if (event.type === HttpEventType.Response) { // Check if the upload is complete
+          window.location.reload(); // Reload only if upload is completed
+        }
       },
       (error: HttpErrorResponse) => {
         console.log(error);
@@ -69,21 +72,22 @@ export class FileComponent implements OnInit{
   //
   // }
 
-  onDelete(fileName: string) {
-    const isConfirmed = window.confirm("Êtes-vous sûr de vouloir supprimer ce Departement ?");
+  onDelete(fileName: string): void {
+    const isConfirmed = window.confirm("Êtes-vous sûr de vouloir supprimer ce département ?");
     if (isConfirmed) {
-      this.fileService.deleteFile(fileName).subscribe(
-        (response) => {
-          console.log('Success:', response);
-          // Handle success message, maybe show a notification
+      this.fileService.deleteFile(fileName).subscribe({
+        next: (response) => {
+          // Optionally show a success message here
+          window.location.reload(); // Reload only on successful deletion
         },
-        (error) => {
+        error: (error) => {
           console.error('Error:', error);
-          // Handle error, maybe show an error message
+          // Optionally show an error notification
         }
-      );
+      });
     }
   }
+
   private updateStatus(loaded: number, total: number, requestType: string): void {
     this.fileStatus.status = 'progress';
     this.fileStatus.requestType = requestType;

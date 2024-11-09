@@ -1,5 +1,5 @@
 <div class="chat-container">
-  <h2>Trouvons ensemble le profil parfait !</h2>
+  <h2>Trouvons ensemble le candidat idéal !</h2>
 
   <!-- Chat Display with Input Inside Scrollable Container -->
   <div class="chat-messages">
@@ -10,18 +10,18 @@
       <p>{{ message.text }}</p>
     </div>
     <div *ngIf="isLoading" class="loading">Chargement en cours...</div>
-
-    <!-- Input Form for the Question -->
-    <form (ngSubmit)="askQuestion()" class="input-form">
-      <input
-        class="text-area"
-        type="text"
-        [(ngModel)]="question"
-        name="question"
-        placeholder="Tapez votre question ici..."
-        required
-      />
-      <button type="submit" [disabled]="isLoading || !question.trim()">Envoyer</button>
-    </form>
   </div>
+
+  <!-- Input Form for the Question -->
+  <form (ngSubmit)="askQuestion()" class="input-form">
+    <input
+      class="text-area"
+      type="text"
+      [(ngModel)]="question"
+      name="question"
+      placeholder="Tapez votre question ici..."
+      required
+    />
+    <button type="submit" [disabled]="isLoading || !question.trim()">Envoyer</button>
+  </form>
 </div>
